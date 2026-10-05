@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E0E0E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Outreach Desk">
+<title>Outreach Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0E0E0E;--panel:#161616;--panel2:#1d1d1d;--line:#2a2a2a;--text:#EDE9E3;--muted:#8d8780;--acc:#C2561A;--acc2:#e06a2a;--ok:#7fa86b}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:1.45}
+body{min-height:100vh;padding-bottom:84px}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.07;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+h1,h2,h3,.disp{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;letter-spacing:.02em}
+h1{font-size:44px;line-height:1}
+h2{font-size:28px;margin:28px 0 12px}
+h3{font-size:22px}
+a{color:var(--acc2)}
+.wrap{max-width:1100px;margin:0 auto;padding:20px 18px}
+header.top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:14px}
+.brand{font-family:'Bebas Neue';font-size:20px;letter-spacing:.12em;color:var(--acc)}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+nav.tabs{position:fixed;bottom:0;left:0;right:0;background:rgba(14,14,14,.96);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
+nav.tabs button{flex:1;max-width:160px;background:none;border:0;color:var(--muted);font-family:'Bebas Neue';font-size:19px;letter-spacing:.06em;padding:16px 4px;cursor:pointer;border-top:2px solid transparent}
+nav.tabs button.on{color:var(--text);border-top-color:var(--acc)}
+.grid{display:grid;gap:12px}
+.g3{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px}
+.stat .num{font-family:'Bebas Neue';font-size:46px;line-height:1}
+.stat .lbl{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:10px 0}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .25s}
+.bar.done i{background:var(--ok)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.between{justify-content:space-between}
+button,.btn{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:4px;padding:9px 14px;font:inherit;font-weight:600;cursor:pointer}
+button:hover{border-color:#444}
+.primary{background:var(--acc);border-color:var(--acc);color:#fff}
+.primary:hover{background:var(--acc2);border-color:var(--acc2)}
+.ghost{background:none}
+.plus{font-size:20px;padding:4px 16px;line-height:1.3}
+.minus{padding:4px 10px;color:var(--muted)}
+input,select,textarea{width:100%;background:#0b0b0b;color:var(--text);border:1px solid var(--line);border-radius:4px;padding:10px;font:inherit}
+textarea{min-height:80px;resize:vertical}
+label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:10px 0 4px}
+.banner{border-left:3px solid var(--acc);background:var(--panel);padding:12px 16px;margin:18px 0;border-radius:0 6px 6px 0}
+.list>div{border-bottom:1px solid var(--line);padding:12px 0}
+.list>div:last-child{border-bottom:0}
+.overdue{color:var(--acc2)}
+.pill{display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;border-radius:20px;border:1px solid var(--line);color:var(--muted)}
+.s-Yet{color:#bdb6ad}.s-Cold{color:#7c9cc4;border-color:#34465c}.s-Warm{color:#e0a64a;border-color:#5c4626}.s-Hot{color:var(--acc2);border-color:#5e2f17}.s-Client{color:var(--ok);border-color:#3a5230}.s-Not{color:#666}
+.clock{padding:10px 12px}.clock.live{border-color:var(--acc)}
+.clock .t{font-family:'Bebas Neue';font-size:30px}
+.kanban{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(230px,1fr);gap:10px;overflow-x:auto;padding-bottom:10px}
+.col{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px;min-height:200px}
+.col.drag{border-color:var(--acc)}
+.col h3{font-size:18px;margin-bottom:8px;display:flex;justify-content:space-between}
+.lc{background:var(--panel2);border:1px solid var(--line);border-radius:4px;padding:10px;margin-bottom:8px;cursor:grab}
+.lc b{display:block}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600}
+tr.click{cursor:pointer}tr.click:hover td{background:var(--panel)}
+.tablewrap{overflow-x:auto}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:flex-start;justify-content:center;z-index:100;overflow-y:auto;padding:30px 12px}
+.modal.on{display:flex}
+.sheet{background:var(--panel);border:1px solid var(--line);border-radius:8px;width:100%;max-width:720px;padding:22px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.fgrid .full{grid-column:1/-1}
+@media(max-width:620px){.fgrid{grid-template-columns:1fr}h1{font-size:36px}}
+.task{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+.task input{width:20px;height:20px;accent-color:var(--acc);flex:none;margin-top:2px}
+.task.done span{color:var(--muted);text-decoration:line-through}
+.task .x{margin-left:auto;padding:2px 8px;color:var(--muted);background:none;border:0}
+.script{white-space:pre-wrap}
+.toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:var(--acc);color:#fff;padding:10px 18px;border-radius:4px;font-weight:600;opacity:0;transition:opacity .2s;z-index:200;pointer-events:none}
+.toast.on{opacity:1}
+.seg button{border-radius:0}.seg button:first-child{border-radius:4px 0 0 4px}.seg button:last-child{border-radius:0 4px 4px 0}
+.seg button.on{background:var(--acc);border-color:var(--acc)}
+.tl{font-size:13px;border-left:2px solid var(--line);padding:4px 0 4px 12px;margin-left:4px}
+canvas{width:100%;display:block}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div><div class="brand">OUTREACH DESK</div><h1 id="pageTitle">Today</h1></div>
+  <div class="muted small" id="todayDate"></div>
+</header>
+<main id="view"></main>
+</div>
+<nav class="tabs">
+  <button data-tab="today" class="on">Today</button>
+  <button data-tab="leads">Leads</button>
+  <button data-tab="plan">Plan</button>
+  <button data-tab="stats">Stats</button>
+  <button data-tab="scripts">Scripts</button>
+</nav>
+<div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+<input type="file" id="fileIn" class="hide">
+<script>
+const TZ='Africa/Lagos', KEY='outreachDesk_v1';
+const STATUSES=['Yet to reach out','Cold','Warm','Hot','Client','Not interested'];
+const SOURCES=['Meta Ads Library','LinkedIn','Instagram','Referral','Other'];
+const FIELDS=[['company','Company'],['decisionMaker','Decision maker'],['role','Role'],['country','Country'],['website','Website'],['instagram','Instagram'],['linkedin','LinkedIn'],['email','Email'],['whereFound','Where found'],['problem','Brand problem spotted'],['status','Status'],['firstContact','First contact'],['lastFollowUp','Last follow-up'],['nextFollowUp','Next follow-up'],['notes','Notes']];
+const METRICS=[['dms','DMs sent'],['followups','Follow-ups done'],['prospects','Prospects added'],['looms','Looms recorded'],['replies','Replies'],['calls','Calls booked']];
+const PLAN=[
+ {w:1,title:'Week 1',dates:'Oct 5 to 11',start:'2026-10-05',end:'2026-10-11',focus:'Offer and profile',tasks:['Write your one-sentence offer','Name your method','Update LinkedIn headline and bio','Update Instagram bio','Pin 3 posts (offer story, Aiben case study, your why)','Set up highlights (Client Wins, About, Services, Process)']},
+ {w:2,title:'Week 2',dates:'Oct 12 to 18',start:'2026-10-12',end:'2026-10-18',focus:'Prospects',tasks:['10 brands from Meta Ads Library','10 brands from LinkedIn or Instagram','Decision maker name for all 20','One brand problem written for each','Draft 5 short audits']},
+ {w:3,title:'Week 3',dates:'Oct 19 to 25',start:'2026-10-19',end:'2026-10-25',focus:'Outreach',tasks:['Warm up before each DM (like 3 posts, one real comment)','3 to 5 DMs a day (about 25 total)','Record a Loom for every reply']},
+ {w:4,title:'Week 4',dates:'Oct 26 to Nov 1',start:'2026-10-26',end:'2026-11-01',focus:'Follow-up and partners',tasks:['Follow up every DM once or twice','Message 10 referral partners (copywriters, web devs, ad managers)','Publish your first weekly post','Book one call']}
+];
+const SCRIPTS=[
+ ['Ad vs website gap','Saw your [product] ad on Instagram. The ad and your website feel like two different companies, and that gap usually costs trust right at checkout. I noted three things I\'d tighten. Want a 2 minute video?'],
+ ['Multi-product brand','[Company] has three products now and each one looks like it came from a different brand. I fixed this exact problem for [Aiben]: one parent identity, clear sub-brands. Want to see how it would look for you?'],
+ ['Logo at small size','Small one: your logo disappears at app-icon size, which is where most people first meet you. I can show you the fix in a short video if it\'s useful.'],
+ ['Follow-up: new angle','Recorded a quick note on your new launch ad, same idea as before but sharper. Want it?'],
+ ['Follow-up: light','I think Instagram is hiding my messages from you again. Should I resend the breakdown?'],
+ ['Follow-up: last nudge','Last nudge from me on this one, unless I spot something bigger on your next campaign.']
+];
+const uid=()=>Math.random().toString(36).slice(2,10)+Date.now().toString(36);
+const today=()=>new Intl.DateTimeFormat('en-CA',{timeZone:TZ}).format(new Date());
+const addDays=(d,n)=>{const x=new Date(d+'T12:00:00Z');x.setUTCDate(x.getUTCDate()+n);return x.toISOString().slice(0,10)};
+const fmtDate=d=>d?new Date(d+'T12:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'UTC'}):'';
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const sCls=s=>'s-'+(s||'Yet').split(' ')[0];
+
+function fresh(){return{v:1,leads:[],logs:{},targets:{dms:5,followups:3,prospects:3,looms:1,replies:1,calls:1},
+ plan:PLAN.flatMap(p=>p.tasks.map(t=>({id:uid(),week:p.w,text:t,done:false}))),
+ scripts:SCRIPTS.map(([t,b])=>({id:uid(),title:t,body:b})),view:'board'}}
+let S;try{S=JSON.parse(localStorage.getItem(KEY))||fresh()}catch(e){S=fresh()}
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+const log=(d=today())=>(S.logs[d]=S.logs[d]||{dms:0,followups:0,prospects:0,looms:0,replies:0,calls:0});
+function bump(m,n=1){const l=log();l[m]=Math.max(0,(l[m]||0)+n);save()}
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),1600)}
+
+let tab='today';
+document.querySelectorAll('nav.tabs button').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;render()});
+function render(){
+ document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));
+ document.getElementById('pageTitle').textContent={today:'Today',leads:'Leads',plan:'30-day plan',stats:'Stats',scripts:'Scripts'}[tab];
+ document.getElementById('todayDate').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:TZ})+' · Lagos';
+ ({today:rToday,leads:rLeads,plan:rPlan,stats:rStats,scripts:rScripts})[tab]();
+ window.scrollTo(0,0);
+}
+function streak(){let n=0,d=today();if(!(S.logs[d]?.dms>0))d=addDays(d,-1);while(S.logs[d]?.dms>0){n++;d=addDays(d,-1)}return n}
+function currentWeek(){const t=today();return PLAN.find(p=>t>=p.start&&t<=p.end)||(t<PLAN[0].start?PLAN[0]:null)}
+function dueLeads(){const t=today();return S.leads.filter(l=>l.nextFollowUp&&l.nextFollowUp<=t&&!['Client','Not interested'].includes(l.status)).sort((a,b)=>a.nextFollowUp.localeCompare(b.nextFollowUp))}
+
+function rToday(){
+ const l=log(),wk=currentWeek(),due=dueLeads(),st=streak();
+ const wkTasks=wk?S.plan.filter(t=>t.week===wk.w):[];const wkDone=wkTasks.filter(t=>t.done).length;
+ let h=wk?`<div class="banner"><div class="row between"><div><span class="disp" style="font-size:20px;color:var(--acc)">${wk.title} · ${wk.focus}</span> <span class="muted small">${wk.dates}</span></div><span class="small muted">${wkDone}/${wkTasks.length} done</span></div>${wkTasks.filter(t=>!t.done).slice(0,2).map(t=>`<div class="small" style="margin-top:6px">Next: ${esc(t.text)}</div>`).join('')}</div>`:`<div class="banner">30-day plan complete window. Keep the rhythm going.</div>`;
+ h+=`<div class="grid g3">`;
+ for(const[k,n]of METRICS){const v=l[k]||0,t=S.targets[k]||1,p=Math.min(100,v/t*100);
+  h+=`<div class="card stat"><div class="lbl">${n}</div><div class="row between"><div class="num">${v}<span class="muted" style="font-size:22px"> / ${t}</span></div></div><div class="bar ${v>=t?'done':''}"><i style="width:${p}%"></i></div><div class="row"><button class="primary plus" data-b="${k}">+1</button><button class="minus" data-m="${k}">−</button></div></div>`}
+ h+=`<div class="card stat"><div class="lbl">DM streak</div><div class="num">${st}<span class="muted" style="font-size:22px"> day${st===1?'':'s'}</span></div><div class="small muted" style="margin-top:8px">Consecutive days with at least one DM.</div><button class="ghost small" id="editT" style="margin-top:10px">Edit targets</button></div></div>`;
+ h+=`<h2>Follow-ups due <span class="muted" style="font-size:20px">${due.length}</span></h2><div class="card list">`;
+ h+=due.length?due.map(x=>`<div class="row between"><div><b>${esc(x.company)}</b> <span class="pill ${sCls(x.status)}">${esc(x.status)}</span><div class="small ${x.nextFollowUp<today()?'overdue':'muted'}">${x.nextFollowUp<today()?'Overdue since ':'Due '}${fmtDate(x.nextFollowUp)} · ${esc(x.decisionMaker||'')}</div></div><div class="row"><button class="ghost" data-open="${x.id}">Open</button><button class="primary" data-fu="${x.id}">Mark followed up</button></div></div>`).join(''):`<div class="muted">Nothing due. Add prospects or send new DMs.</div>`;
+ h+=`</div><h2>Best send times</h2><div class="grid g3" id="clocks"></div>
+ <p class="small muted" style="margin-top:8px">Highlighted when it's 8 to 11am, 1 to 3pm, or after 8pm there.</p>`;
+ V(h);
+ q('[data-b]').forEach(b=>b.onclick=()=>{bump(b.dataset.b);rToday()});
+ q('[data-m]').forEach(b=>b.onclick=()=>{bump(b.dataset.m,-1);rToday()});
+ q('[data-fu]').forEach(b=>b.onclick=()=>{markFU(b.dataset.fu);toast('Follow-up logged');rToday()});
+ q('[data-open]').forEach(b=>b.onclick=()=>leadModal(b.dataset.open));
+ document.getElementById('editT').onclick=targetsModal;
+ clocks();
+}
+let clockT;function clocks(){clearInterval(clockT);const f=()=>{const el=document.getElementById('clocks');if(!el)return clearInterval(clockT);
+ el.innerHTML=[['New York','America/New_York'],['London','Europe/London'],['Toronto','America/Toronto']].map(([c,z])=>{const now=new Date();const hr=+new Intl.DateTimeFormat('en-GB',{hour:'numeric',hourCycle:'h23',timeZone:z}).format(now);const live=(hr>=8&&hr<11)||(hr>=13&&hr<15)||hr>=20;
+ return`<div class="card clock ${live?'live':''}"><div class="lbl small muted">${c}</div><div class="t">${now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:z})}</div><div class="small ${live?'overdue':'muted'}">${live?'Good time to send':'Wait'}</div></div>`}).join('')};f();clockT=setInterval(f,30000)}
+
+function markFU(id){const x=S.leads.find(l=>l.id===id);if(!x)return;const t=today();x.lastFollowUp=t;x.nextFollowUp=addDays(t,4);act(x,'Follow-up');bump('followups');save()}
+function act(x,type,note=''){(x.activity=x.activity||[]).unshift({id:uid(),date:today(),type,note})}
+
+function rLeads(){
+ const fq=S.fq||'',fs=S.fs||'';
+ let leads=S.leads.filter(l=>(!fs||l.status===fs)&&(!fq||FIELDS.some(([k])=>String(l[k]||'').toLowerCase().includes(fq.toLowerCase()))));
+ let h=`<div class="row between" style="margin:18px 0"><div class="row seg"><button data-v="board" class="${S.view==='board'?'on':''}">Board</button><button data-v="table" class="${S.view==='table'?'on':''}">Table</button></div>
+ <div class="row"><button class="primary" id="addL">+ Add lead</button><button id="imp">Import CSV</button><button id="exp">Export CSV</button></div></div>
+ <div class="row" style="margin-bottom:14px"><input id="fq" placeholder="Search leads" value="${esc(fq)}" style="flex:2;min-width:180px"><select id="fs" style="flex:1;min-width:150px"><option value="">All statuses</option>${STATUSES.map(s=>`<option ${s===fs?'selected':''}>${s}</option>`).join('')}</select></div>`;
+ if(S.view==='board'){h+=`<div class="kanban">`+STATUSES.map(s=>{const ls=leads.filter(l=>(l.status||STATUSES[0])===s);return`<div class="col" data-col="${s}"><h3><span class="${sCls(s)}">${s}</span><span class="muted">${ls.length}</span></h3>${ls.map(l=>`<div class="lc" draggable="true" data-id="${l.id}"><b>${esc(l.company||'Untitled')}</b><div class="small muted">${esc(l.decisionMaker||'')}${l.country?' · '+esc(l.country):''}</div>${l.nextFollowUp?`<div class="small ${l.nextFollowUp<=today()?'overdue':'muted'}">Next: ${fmtDate(l.nextFollowUp)}</div>`:''}<select class="small mv" data-id="${l.id}" style="margin-top:8px;padding:6px">${STATUSES.map(x=>`<option ${x===s?'selected':''}>${x}</option>`).join('')}</select></div>`).join('')}</div>`}).join('')+`</div>`}
+ else{h+=`<div class="card tablewrap"><table><tr><th>Company</th><th>Decision maker</th><th>Status</th><th>Country</th><th>Next follow-up</th><th>Brand problem</th></tr>${leads.map(l=>`<tr class="click" data-id="${l.id}"><td><b>${esc(l.company)}</b></td><td>${esc(l.decisionMaker)}<div class="small muted">${esc(l.role)}</div></td><td><span class="pill ${sCls(l.status)}">${esc(l.status)}</span></td><td>${esc(l.country)}</td><td class="${l.nextFollowUp&&l.nextFollowUp<=today()?'overdue':''}">${fmtDate(l.nextFollowUp)}</td><td class="small">${esc((l.problem||'').slice(0,90))}</td></tr>`).join('')||'<tr><td colspan="6" class="muted">No leads yet.</td></tr>'}</table></div>`}
+ V(h);
+ q('[data-v]').forEach(b=>b.onclick=()=>{S.view=b.dataset.v;save();rLeads()});
+ const fqEl=document.getElementById('fq');fqEl.oninput=()=>{S.fq=fqEl.value;clearTimeout(fqEl._t);fqEl._t=setTimeout(()=>{rLeads();const e=document.getElementById('fq');e.focus();e.setSelectionRange(e.value.length,e.value.length)},300)};
+ document.getElementById('fs').onchange=e=>{S.fs=e.target.value;rLeads()};
+ document.getElementById('addL').onclick=()=>leadModal();
+ document.getElementById('exp').onclick=exportCSV;
+ document.getElementById('imp').onclick=()=>pickFile('.csv',importCSV);
+ q('tr.click,.lc').forEach(e=>e.onclick=ev=>{if(ev.target.tagName!=='SELECT')leadModal(e.dataset.id)});
+ q('.mv').forEach(s=>{s.onclick=e=>e.stopPropagation();s.onchange=()=>{setStatus(s.dataset.id,s.value);rLeads()}});
+ q('.lc').forEach(c=>c.ondragstart=e=>e.dataTransfer.setData('text',c.dataset.id));
+ q('.col').forEach(c=>{c.ondragover=e=>{e.preventDefault();c.classList.add('drag')};c.ondragleave=()=>c.classList.remove('drag');c.ondrop=e=>{e.preventDefault();setStatus(e.dataTransfer.getData('text'),c.dataset.col);rLeads()}});
+}
+function setStatus(id,s){const x=S.leads.find(l=>l.id===id);if(!x||x.status===s)return;x.status=s;act(x,'Status',s);if(s==='Cold'&&x.firstContact)x.nextFollowUp=addDays(today(),4);if(s==='Client'||s==='Not interested')x.nextFollowUp='';save();toast('Moved to '+s)}
+
+function leadModal(id){
+ const x=id?S.leads.find(l=>l.id===id):{status:STATUSES[0],whereFound:SOURCES[0],activity:[]};
+ const inp=(k,n,type='text',cls='')=>`<div class="${cls}"><label>${n}</label><input type="${type}" name="${k}" value="${esc(x[k]||'')}"></div>`;
+ M(`<div class="row between"><h2 style="margin:0">${id?esc(x.company||'Lead'):'New lead'}</h2><button class="ghost" data-close>Close</button></div>
+ <form id="lf"><div class="fgrid">${inp('company','Company')}${inp('decisionMaker','Decision maker')}${inp('role','Role')}${inp('country','Country')}${inp('website','Website')}${inp('instagram','Instagram')}${inp('linkedin','LinkedIn')}${inp('email','Email','email')}
+ <div><label>Where found</label><select name="whereFound">${SOURCES.map(s=>`<option ${s===x.whereFound?'selected':''}>${s}</option>`).join('')}</select></div>
+ <div><label>Status</label><select name="status">${STATUSES.map(s=>`<option ${s===x.status?'selected':''}>${s}</option>`).join('')}</select></div>
+ <div class="full"><label>Brand problem spotted</label><textarea name="problem">${esc(x.problem||'')}</textarea></div>
+ ${inp('firstContact','First contact','date')}${inp('lastFollowUp','Last follow-up','date')}${inp('nextFollowUp','Next follow-up','date')}<div></div>
+ <div class="full"><label>Notes</label><textarea name="notes">${esc(x.notes||'')}</textarea></div></div>
+ <div class="row between" style="margin-top:18px"><div>${id?'<button type="button" class="ghost" id="delL" style="color:var(--acc2)">Delete</button>':''}</div><button class="primary" type="submit">Save lead</button></div></form>
+ ${id?`<h3 style="margin-top:24px">Log activity</h3><div class="row" style="margin:10px 0">${['DM sent','Follow-up','Loom sent','Reply','Call','Note'].map(a=>`<button class="small" data-act="${a}">${a}</button>`).join('')}</div>
+ <div>${(x.activity||[]).map(a=>`<div class="tl"><b>${esc(a.type)}</b> <span class="muted">${fmtDate(a.date)}</span>${a.note?' · '+esc(a.note):''}</div>`).join('')||'<div class="muted small">No activity yet.</div>'}</div>`:''}`);
+ document.getElementById('lf').onsubmit=e=>{e.preventDefault();const fd=new FormData(e.target),o=Object.fromEntries(fd);
+  if(!o.company.trim())return toast('Add a company name');
+  if(id){const prev=x.status;Object.assign(x,o);if(prev!==o.status){act(x,'Status',o.status);if(o.status==='Cold'&&x.firstContact&&!fd.get('nextFollowUp'))x.nextFollowUp=addDays(today(),4)}}
+  else{const n={id:uid(),created:today(),activity:[],...o};S.leads.unshift(n);bump('prospects')}
+  save();closeM();toast('Saved');render()};
+ if(id){document.getElementById('delL').onclick=()=>{if(confirm('Delete this lead?')){S.leads=S.leads.filter(l=>l.id!==id);save();closeM();render()}};
+  q('[data-act]').forEach(b=>b.onclick=()=>{const a=b.dataset.act,t=today();let note='';
+   if(a==='Note'){note=prompt('Note');if(!note)return}
+   act(x,a,note);
+   if(a==='DM sent'){bump('dms');if(!x.firstContact)x.firstContact=t;if(x.status===STATUSES[0])x.status='Cold';x.nextFollowUp=addDays(t,4)}
+   if(a==='Follow-up'){bump('followups');x.lastFollowUp=t;x.nextFollowUp=addDays(t,4)}
+   if(a==='Loom sent')bump('looms');
+   if(a==='Reply'){bump('replies');if(['Yet to reach out','Cold'].includes(x.status))x.status='Warm'}
+   if(a==='Call'){bump('calls');if(x.status!=='Client')x.status='Hot'}
+   save();toast(a+' logged');leadModal(id);render()})}
+}
+function targetsModal(){M(`<div class="row between"><h2 style="margin:0">Daily targets</h2><button class="ghost" data-close>Close</button></div><form id="tf"><div class="fgrid">${METRICS.map(([k,n])=>`<div><label>${n}</label><input type="number" min="1" name="${k}" value="${S.targets[k]}"></div>`).join('')}</div><button class="primary" style="margin-top:16px">Save</button></form>`);
+ document.getElementById('tf').onsubmit=e=>{e.preventDefault();for(const[k,v]of new FormData(e.target))S.targets[k]=Math.max(1,+v||1);save();closeM();render()}}
+
+function rPlan(){
+ const all=S.plan.length,done=S.plan.filter(t=>t.done).length;
+ let h=`<div class="card" style="margin-top:18px"><div class="row between"><span class="disp" style="font-size:22px">Overall</span><span>${done}/${all} · ${all?Math.round(done/all*100):0}%</span></div><div class="bar ${done===all&&all?'done':''}"><i style="width:${all?done/all*100:0}%"></i></div></div>`;
+ const wk=currentWeek();
+ for(const p of PLAN){const ts=S.plan.filter(t=>t.week===p.w),d=ts.filter(t=>t.done).length;
+  h+=`<h2 ${wk&&wk.w===p.w?'style="color:var(--acc)"':''}>${p.title} · ${p.focus} <span class="muted" style="font-size:18px">${p.dates}</span></h2><div class="card"><div class="bar ${d===ts.length&&ts.length?'done':''}"><i style="width:${ts.length?d/ts.length*100:0}%"></i></div>
+  ${ts.map(t=>`<div class="task ${t.done?'done':''}"><input type="checkbox" data-t="${t.id}" ${t.done?'checked':''}><span>${esc(t.text)}</span>${t.custom?`<button class="x" data-dt="${t.id}">×</button>`:''}</div>`).join('')}
+  <form class="row addT" data-w="${p.w}" style="margin-top:12px"><input placeholder="Add a task" style="flex:1"><button>Add</button></form></div>`}
+ V(h);
+ q('[data-t]').forEach(c=>c.onchange=()=>{S.plan.find(t=>t.id===c.dataset.t).done=c.checked;save();rPlan()});
+ q('[data-dt]').forEach(b=>b.onclick=()=>{S.plan=S.plan.filter(t=>t.id!==b.dataset.dt);save();rPlan()});
+ q('.addT').forEach(f=>f.onsubmit=e=>{e.preventDefault();const v=f.querySelector('input').value.trim();if(!v)return;S.plan.push({id:uid(),week:+f.dataset.w,text:v,done:false,custom:true});save();rPlan()});
+}
+
+function rStats(){
+ const days=[...Array(30)].map((_,i)=>addDays(today(),i-29));
+ const tot=k=>days.reduce((a,d)=>a+(S.logs[d]?.[k]||0),0);
+ const dms=tot('dms'),rep=tot('replies');
+ let h=`<div class="grid g3" style="margin-top:18px">${[['DMs (30 days)',dms],['Follow-ups',tot('followups')],['Replies',rep],['Calls',tot('calls')],['Reply rate',dms?Math.round(rep/dms*100)+'%':'–'],['Total leads',S.leads.length]].map(([n,v])=>`<div class="card stat"><div class="lbl">${n}</div><div class="num">${v}</div></div>`).join('')}</div>
+ <h2>Last 30 days</h2><div class="card"><canvas id="ch" height="260"></canvas><div class="row small" style="margin-top:10px;gap:16px"><span><b style="color:#C2561A">■</b> DMs</span><span><b style="color:#e0a64a">■</b> Follow-ups</span><span><b style="color:#7fa86b">■</b> Replies</span><span><b style="color:#EDE9E3">■</b> Calls</span></div></div>
+ <div class="grid g2"><div><h2>Pipeline</h2><div class="card list">${STATUSES.map(s=>{const n=S.leads.filter(l=>(l.status||STATUSES[0])===s).length;return`<div class="row between"><span class="${sCls(s)}">${s}</span><b>${n}</b></div>`}).join('')}</div></div>
+ <div><h2>Leads added per week</h2><div class="card list">${[...Array(6)].map((_,i)=>{const end=addDays(today(),-7*i),start=addDays(end,-6);const n=S.leads.filter(l=>l.created&&l.created>=start&&l.created<=end).length;return`<div class="row between"><span>${fmtDate(start)} to ${fmtDate(end)}</span><b>${n}</b></div>`}).join('')}</div></div></div>
+ <h2>Your data</h2><div class="card"><p class="small muted">Everything is saved on this device. Back up regularly, and use the backup file to move your data to your phone or laptop.</p><div class="row" style="margin-top:12px"><button class="primary" id="bk">Download backup</button><button id="rs">Restore backup</button></div></div>`;
+ V(h);
+ drawChart(days);
+ document.getElementById('bk').onclick=()=>dl(`outreach-desk-backup-${today()}.json`,JSON.stringify(S,null,1),'application/json');
+ document.getElementById('rs').onclick=()=>pickFile('.json',txt=>{try{const o=JSON.parse(txt);if(!o.leads||!o.logs)throw 0;if(confirm('Replace the data on this device with the backup?')){S=o;save();render();toast('Backup restored')}}catch(e){toast('That file is not a valid backup')}});
+}
+function drawChart(days){const c=document.getElementById('ch');const dpr=window.devicePixelRatio||1;const W=c.clientWidth,H=260;c.width=W*dpr;c.height=H*dpr;const x=c.getContext('2d');x.scale(dpr,dpr);
+ const ks=[['dms','#C2561A'],['followups','#e0a64a'],['replies','#7fa86b'],['calls','#EDE9E3']];
+ const max=Math.max(4,...days.map(d=>Math.max(...ks.map(([k])=>S.logs[d]?.[k]||0))));
+ const pl=28,pb=24,cw=(W-pl)/days.length,ch=H-pb-10;
+ x.strokeStyle='#2a2a2a';x.fillStyle='#8d8780';x.font='11px Inter';
+ for(let i=0;i<=4;i++){const y=10+ch-ch*i/4;x.beginPath();x.moveTo(pl,y);x.lineTo(W,y);x.stroke();x.fillText(Math.round(max*i/4),2,y+4)}
+ days.forEach((d,i)=>{const bw=Math.max(1,(cw-4)/4);ks.forEach(([k,col],j)=>{const v=S.logs[d]?.[k]||0;const hh=ch*v/max;x.fillStyle=col;x.fillRect(pl+i*cw+2+j*bw,10+ch-hh,bw-0.5,hh)});
+  if(i%5===4||i===29){x.fillStyle='#8d8780';x.fillText(fmtDate(d),pl+i*cw-10,H-6)}})}
+
+function rScripts(){
+ let h=`<div class="row between" style="margin:18px 0"><p class="muted small">Adapt each one to the brand. Never paste them as is.</p><button class="primary" id="addS">+ Add script</button></div><div class="grid g2">`+
+ S.scripts.map(s=>`<div class="card"><div class="row between"><h3>${esc(s.title)}</h3><div class="row"><button class="small ghost" data-es="${s.id}">Edit</button></div></div><p class="script" style="margin:10px 0 14px">${esc(s.body)}</p><button class="primary small" data-cp="${s.id}">Copy</button></div>`).join('')+`</div>`;
+ V(h);
+ document.getElementById('addS').onclick=()=>scriptModal();
+ q('[data-es]').forEach(b=>b.onclick=()=>scriptModal(b.dataset.es));
+ q('[data-cp]').forEach(b=>b.onclick=async()=>{const s=S.scripts.find(x=>x.id===b.dataset.cp);try{await navigator.clipboard.writeText(s.body);toast('Copied')}catch(e){prompt('Copy this',s.body)}});
+}
+function scriptModal(id){const s=id?S.scripts.find(x=>x.id===id):{title:'',body:''};
+ M(`<div class="row between"><h2 style="margin:0">${id?'Edit script':'New script'}</h2><button class="ghost" data-close>Close</button></div><form id="sf"><label>Title</label><input name="title" value="${esc(s.title)}"><label>Message</label><textarea name="body" style="min-height:140px">${esc(s.body)}</textarea><div class="row between" style="margin-top:16px"><div>${id?'<button type="button" class="ghost" id="delS" style="color:var(--acc2)">Delete</button>':''}</div><button class="primary">Save</button></div></form>`);
+ document.getElementById('sf').onsubmit=e=>{e.preventDefault();const o=Object.fromEntries(new FormData(e.target));if(!o.body.trim())return;if(id)Object.assign(s,o);else S.scripts.push({id:uid(),...o});save();closeM();rScripts()};
+ if(id)document.getElementById('delS').onclick=()=>{if(confirm('Delete this script?')){S.scripts=S.scripts.filter(x=>x.id!==id);save();closeM();rScripts()}}}
+
+// CSV
+const csvCell=v=>{v=String(v??'');return /[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
+function exportCSV(){const rows=[FIELDS.map(f=>f[1]).join(','),...S.leads.map(l=>FIELDS.map(([k])=>csvCell(l[k])).join(','))];dl(`leads-${today()}.csv`,rows.join('\r\n'),'text/csv')}
+function parseCSV(t){const out=[];let row=[],cell='',q=false;t=t.replace(/^\uFEFF/,'');for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){cell+='"';i++}else q=false}else cell+=c}else if(c==='"')q=true;else if(c===','){row.push(cell);cell=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;row.push(cell);out.push(row);row=[];cell=''}else cell+=c}if(cell||row.length){row.push(cell);out.push(row)}return out.filter(r=>r.some(x=>x.trim()))}
+function normDate(v){v=(v||'').trim();if(!v)return'';if(/^\d{4}-\d{2}-\d{2}$/.test(v))return v;const d=new Date(v);return isNaN(d)?'':d.toISOString().slice(0,10)}
+function importCSV(txt){const rows=parseCSV(txt);if(rows.length<2)return toast('No rows found');const head=rows[0].map(h=>h.trim().toLowerCase());
+ const idx=FIELDS.map(([k,n])=>head.indexOf(n.toLowerCase()));if(idx[0]<0)return toast('Needs a Company column');let n=0;
+ for(const r of rows.slice(1)){const o={id:uid(),created:today(),activity:[]};FIELDS.forEach(([k],i)=>{o[k]=idx[i]>=0?(r[idx[i]]||'').trim():''});
+  if(!o.company||/delete me/i.test(o.company))continue;['firstContact','lastFollowUp','nextFollowUp'].forEach(k=>o[k]=normDate(o[k]));
+  if(!STATUSES.includes(o.status))o.status=STATUSES[0];const ex=S.leads.find(l=>l.company.toLowerCase()===o.company.toLowerCase());
+  if(ex){FIELDS.forEach(([k])=>{if(o[k])ex[k]=o[k]})}else{S.leads.push(o)}n++}
+ save();rLeads();toast(n+' leads imported')}
+
+// helpers
+function V(h){document.getElementById('view').innerHTML=h}
+function q(s){return document.querySelectorAll(s)}
+function M(h){document.getElementById('sheet').innerHTML=h;document.getElementById('modal').classList.add('on');q('[data-close]').forEach(b=>b.onclick=closeM)}
+function closeM(){document.getElementById('modal').classList.remove('on')}
+document.getElementById('modal').onclick=e=>{if(e.target.id==='modal')closeM()};
+function dl(name,data,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function pickFile(acc,cb){const f=document.getElementById('fileIn');f.accept=acc;f.value='';f.onchange=()=>{const file=f.files[0];if(!file)return;const r=new FileReader();r.onload=()=>cb(r.result);r.readAsText(file)};f.click()}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!document.getElementById('modal').classList.contains('on'))render()});
+render();
+</script>
+</body>
+</html>
