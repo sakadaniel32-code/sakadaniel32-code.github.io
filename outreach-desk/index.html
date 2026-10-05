@@ -135,6 +135,39 @@ canvas{width:100%;display:block}
 .cal .leg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
 footer.foot{text-align:center;margin-top:50px}
 .hide{display:none!important}
+
+.sub{color:#A9ADB3;font-size:15px;line-height:1.45;margin:10px 0 0;max-width:540px}
+.sub:empty{display:none}
+nav.tabs{border-radius:28px;gap:2px;padding:6px}
+nav.tabs button{width:62px;height:58px;border-radius:22px;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+nav.tabs button svg{width:20px;height:20px}
+nav.tabs button span{font-size:10.5px;font-weight:500;letter-spacing:.01em;line-height:1}
+nav.tabs button.on{background:var(--lime);color:var(--ink)}
+.qlist{padding-top:4px;padding-bottom:4px}
+.qi{padding:16px 0;border-bottom:1px solid var(--edge)}
+.qi:last-child{border-bottom:0}
+.qi .why{font-size:14px;color:#C3C6CA;margin:8px 0 12px;line-height:1.45}
+.qi .acts{display:flex;gap:8px;flex-wrap:wrap}
+.qi .acts button{min-height:44px}
+.linkish{background:none;border:0;padding:0;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.linkish.acc{color:var(--lime);text-decoration:underline}
+.tag{flex:none;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 9px;border-radius:999px;background:rgba(209,243,102,.14);color:var(--lime)}
+.tag.fu{background:rgba(75,102,224,.22);color:#A9B8FF}
+.tag.late{background:rgba(255,111,97,.16);color:#FF8A7E}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mini .card{padding:14px;border-radius:18px}
+.mini .v{font-size:26px;font-weight:700;line-height:1.1}
+.mini .k{font-size:12px;color:#9EA2A8;margin-top:4px;line-height:1.3}
+.mini .card.hit{border-color:var(--lime)}
+.empty h3{margin:0 0 6px}
+.legend{margin:-4px 0 14px;line-height:1.5}
+.steps{margin:16px 0}
+.steps>div{display:flex;gap:14px;margin-bottom:14px}
+.steps b{flex:none;width:32px;height:32px;border-radius:50%;background:var(--lime);color:var(--ink);display:grid;place-items:center;font-size:15px}
+.steps h3{margin:4px 0 4px}
+.toast.act{display:flex;align-items:center;gap:12px;pointer-events:auto}
+.toast button{flex:none;background:var(--lime);color:var(--ink);border:0;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+@media(max-width:380px){nav.tabs button{width:58px}.mini{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -142,17 +175,18 @@ footer.foot{text-align:center;margin-top:50px}
 <header class="top">
   <div class="toprow"><div class="who"><div class="av">D</div><div><div class="hi">Hello</div><div class="nm">Daniel</div></div></div><div class="datepill" id="todayDate"></div></div>
   <h1 id="pageTitle">Ready for today's outreach?</h1>
+  <p id="pageSub" class="sub"></p>
 </header>
 <div id="heroExtra"></div>
 <main id="view"></main>
 <footer class="foot small muted">Outreach Desk · Desyner · Zyner Limited</footer>
 </div>
 <nav class="tabs">
-  <button data-tab="today" title="Today" aria-label="Today" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg></button>
-  <button data-tab="leads" title="Leads" aria-label="Leads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.6"/><path d="M17.5 14.6c2.3.3 3.7 1.9 4 4.4"/></svg></button>
-  <button data-tab="plan" title="Plan" aria-label="Plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></button>
-  <button data-tab="stats" title="Stats" aria-label="Stats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V12M10 20V5M15 20v-9M20 20v-5"/></svg></button>
-  <button data-tab="scripts" title="Scripts" aria-label="Scripts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-5 4.5V16a2.5 2.5 0 0 1-1-2z"/></svg></button>
+  <button data-tab="today" title="Today" aria-label="Today" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg><span>Today</span></button>
+  <button data-tab="leads" title="Leads" aria-label="Leads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.6"/><path d="M17.5 14.6c2.3.3 3.7 1.9 4 4.4"/></svg><span>Leads</span></button>
+  <button data-tab="plan" title="Plan" aria-label="Plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>Plan</span></button>
+  <button data-tab="stats" title="Progress" aria-label="Progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V12M10 20V5M15 20v-9M20 20v-5"/></svg><span>Progress</span></button>
+  <button data-tab="scripts" title="Messages" aria-label="Messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-5 4.5V16a2.5 2.5 0 0 1-1-2z"/></svg><span>Messages</span></button>
 </nav>
 <div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
 <div class="toast" id="toast"></div>
@@ -162,11 +196,11 @@ const TZ='Africa/Lagos', KEY='outreachDesk_v1';
 const STATUSES=['Yet to reach out','Cold','Warm','Hot','Client','Not interested'];
 const SOURCES=['Meta Ads Library','LinkedIn','Instagram','Referral','Other'];
 const FIELDS=[['company','Company'],['decisionMaker','Decision maker'],['role','Role'],['country','Country'],['website','Website'],['instagram','Instagram'],['linkedin','LinkedIn'],['email','Email'],['whereFound','Where found'],['problem','Brand problem spotted'],['status','Status'],['firstContact','First contact'],['lastFollowUp','Last follow-up'],['nextFollowUp','Next follow-up'],['notes','Notes']];
-const METRICS=[['dms','DMs sent'],['followups','Follow-ups done'],['prospects','Prospects added'],['looms','Looms recorded'],['replies','Replies'],['calls','Calls booked']];
+const METRICS=[['dms','DMs sent'],['followups','Follow-ups done'],['prospects','Prospects added'],['looms','Video audits sent'],['replies','Replies'],['calls','Calls booked']];
 const PLAN=[
  {w:1,title:'Week 1',dates:'Oct 5 to 11',start:'2026-10-05',end:'2026-10-11',focus:'Offer and profile',tasks:['Write your one-sentence offer','Name your method','Update LinkedIn headline and bio','Update Instagram bio','Pin 3 posts (offer story, Aiben case study, your why)','Set up highlights (Client Wins, About, Services, Process)']},
  {w:2,title:'Week 2',dates:'Oct 12 to 18',start:'2026-10-12',end:'2026-10-18',focus:'Prospects',tasks:['10 brands from Meta Ads Library','10 brands from LinkedIn or Instagram','Decision maker name for all 20','One brand problem written for each','Draft 5 short audits']},
- {w:3,title:'Week 3',dates:'Oct 19 to 25',start:'2026-10-19',end:'2026-10-25',focus:'Outreach',tasks:['Warm up before each DM (like 3 posts, one real comment)','3 to 5 DMs a day (about 25 total)','Record a Loom for every reply']},
+ {w:3,title:'Week 3',dates:'Oct 19 to 25',start:'2026-10-19',end:'2026-10-25',focus:'Outreach',tasks:['Warm up before each DM (like 3 posts, one real comment)','3 to 5 DMs a day (about 25 total)','Send a short video audit to everyone who replies']},
  {w:4,title:'Week 4',dates:'Oct 26 to Nov 1',start:'2026-10-26',end:'2026-11-01',focus:'Follow-up and partners',tasks:['Follow up every DM once or twice','Message 10 referral partners (copywriters, web devs, ad managers)','Publish your first weekly post','Book one call']}
 ];
 const SCRIPTS=[
@@ -191,13 +225,15 @@ let S;try{S=JSON.parse(localStorage.getItem(KEY))||fresh()}catch(e){S=fresh()}
 const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
 const log=(d=today())=>(S.logs[d]=S.logs[d]||{dms:0,followups:0,prospects:0,looms:0,replies:0,calls:0});
 function bump(m,n=1){const l=log();l[m]=Math.max(0,(l[m]||0)+n);save()}
+function toastUndo(t,fn){const e=document.getElementById('toast');e.innerHTML='';const s=document.createElement('span');s.textContent=t;const b=document.createElement('button');b.textContent='Undo';b.onclick=()=>{e.classList.remove('on');fn()};e.append(s,b);e.classList.add('on','act');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on','act'),6000)}
 function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),1600)}
 
 let tab='today';
 document.querySelectorAll('nav.tabs button').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;render()});
 function render(){
  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));
- document.getElementById('pageTitle').textContent={today:"Ready for today's outreach?",leads:'Your pipeline',plan:'Your 30-day plan',stats:'Statistics',scripts:'Message scripts'}[tab];
+ document.getElementById('pageTitle').textContent={today:"Ready for today's outreach?",leads:'Your leads',plan:'Your 30-day plan',stats:'Your progress',scripts:'Message templates'}[tab];
+ document.getElementById('pageSub').textContent={today:'',leads:'Every brand you want to work with, and where each conversation stands.',plan:'The 30-day plan, week by week. Tick things off as you go.',stats:'How your outreach is going over the last 30 days.',scripts:'Starting points for first messages and follow-ups. Make each one fit the brand.'}[tab];
  document.getElementById('todayDate').textContent=new Date().toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:TZ})+' · Lagos';
  document.getElementById('heroExtra').innerHTML='';
  ({today:rToday,leads:rLeads,plan:rPlan,stats:rStats,scripts:rScripts})[tab]();
@@ -207,27 +243,71 @@ function streak(){let n=0,d=today();if(!(S.logs[d]?.dms>0))d=addDays(d,-1);while
 function currentWeek(){const t=today();return PLAN.find(p=>t>=p.start&&t<=p.end)||(t<PLAN[0].start?PLAN[0]:null)}
 function dueLeads(){const t=today();return S.leads.filter(l=>l.nextFollowUp&&l.nextFollowUp<=t&&!['Client','Not interested'].includes(l.status)).sort((a,b)=>a.nextFollowUp.localeCompare(b.nextFollowUp))}
 
+function profileURL(x){const ig=(x.instagram||'').trim(),li=(x.linkedin||'').trim(),em=(x.email||'').trim(),w=(x.website||'').trim();
+ if(ig)return /^https?:/.test(ig)?ig:'https://instagram.com/'+ig.replace(/^@/,'').replace(/^instagram\.com\//,'');
+ if(li)return /^https?:/.test(li)?li:'https://'+li.replace(/^\/+/,'');
+ if(em)return 'mailto:'+em;
+ if(w)return /^https?:/.test(w)?w:'https://'+w;return ''}
+function fuCount(x){return (x.activity||[]).filter(a=>a.type==='Follow-up').length}
+function pickScript(x,kind){const fus=S.scripts.filter(s=>/^follow-up/i.test(s.title)),firsts=S.scripts.filter(s=>!/^follow-up/i.test(s.title));
+ let s=kind==='fu'?(fus[Math.min(fuCount(x),fus.length-1)]||S.scripts[0]):(firsts.find(f=>f.id===S.firstScript)||firsts[0]||S.scripts[0]);
+ return s?s.body.replace(/\[Company\]/g,x.company||'your brand'):''}
+function queue(){const l=log(),due=dueLeads().filter(x=>(x.status||STATUSES[0])!==STATUSES[0]);
+ const waiting=S.leads.filter(x=>(x.status||STATUSES[0])===STATUSES[0]).slice().reverse();
+ const left=Math.max(0,(S.targets.dms||5)-(l.dms||0));
+ return{due,fresh:waiting.slice(0,left),more:Math.max(0,waiting.length-left),left}}
+function snapshot(){return JSON.stringify({leads:S.leads,logs:S.logs})}
+function undoable(text,snap){toastUndo(text,()=>{const o=JSON.parse(snap);S.leads=o.leads;S.logs=o.logs;save();render();toast('Undone')})}
+function sendMsg(id,kind){const x=S.leads.find(l=>l.id===id);if(!x)return;const snap=snapshot();const msg=pickScript(x,kind);const url=profileURL(x);
+ try{navigator.clipboard.writeText(msg).catch(()=>{})}catch(e){}
+ if(url)window.open(url,'_blank','noopener');
+ const t=today();let note='';
+ if(kind==='fu'){markFU(id);if(fuCount(x)>=3){x.nextFollowUp='';note=' That was the last nudge, so they\'re off the list.'}}
+ else{act(x,'DM sent');bump('dms');if(!x.firstContact)x.firstContact=t;x.status='Cold';x.nextFollowUp=addDays(t,4)}
+ save();rToday();undoable((url?'Message copied and profile opened. ':'Message copied. ')+'Logged as sent.'+note,snap)}
+function replied(id){const x=S.leads.find(l=>l.id===id);if(!x)return;const snap=snapshot();act(x,'Reply');bump('replies');if(['Yet to reach out','Cold'].includes(x.status))x.status='Warm';x.nextFollowUp='';save();rToday();undoable('Nice. Moved to Warm. Send them a short video audit next.',snap)}
 function rToday(){
- const l=log(),wk=currentWeek(),due=dueLeads(),st=streak();
+ const l=log(),wk=currentWeek(),st=streak(),Q=queue(),n=Q.due.length+Q.fresh.length;
+ document.getElementById('pageTitle').textContent=!S.leads.length?"Let's find your first lead":n?`${n} ${n===1?'person':'people'} to message today`:"You're all caught up";
+ document.getElementById('pageSub').textContent=!S.leads.length?'Add a brand you want to work with. It shows up here, ready to message.':n?'Tap Message: it copies your message, opens their profile and logs it.':'Nothing due right now. Add more leads to keep things moving.';
  const wkTasks=wk?S.plan.filter(t=>t.week===wk.w):[];const wkDone=wkTasks.filter(t=>t.done).length;
- let hb=wk?`<div class="hero grain"><div class="row between"><div class="eyebrow acc">This week · ${wk.dates}</div><button class="circ" id="goPlan" title="Open plan">↗</button></div><div class="ttl">${wk.title}: ${wk.focus}</div><div class="bar"><i style="width:${wkTasks.length?wkDone/wkTasks.length*100:0}%"></i></div><div class="small dim" style="margin-bottom:6px">${wkDone} of ${wkTasks.length} done</div>${wkTasks.filter(t=>!t.done).slice(0,2).map(t=>`<div class="nx"><i></i>${esc(t.text)}</div>`).join('')}</div>`:`<div class="hero grain"><div class="ttl">The 30-day window is over. Keep the rhythm going.</div></div>`;
- document.getElementById('heroExtra').innerHTML=hb;{const gp=document.getElementById('goPlan');if(gp)gp.onclick=()=>{tab='plan';render()}}let h='';
- h+=`<div class="grid g3">`;
- for(const[k,n]of METRICS){const v=l[k]||0,t=S.targets[k]||1,p=Math.min(100,v/t*100);
-  h+=`<div class="card stat ${v>=t?'hit':''}"><div class="lbl">${n}</div><div class="row between"><div class="num">${v}<span class="muted" style="font-size:22px"> / ${t}</span></div></div><div class="bar ${v>=t?'done':''}"><i style="width:${p}%"></i></div><div class="row ctl"><button class="primary plus" data-b="${k}">+1</button><button class="minus" data-m="${k}">−</button></div></div>`}
- h+=`<div class="card stat orange grain"><div class="lbl">DM streak</div><div class="num">${st}<span class="muted" style="font-size:22px"> day${st===1?'':'s'}</span></div><div class="small muted" style="margin-top:8px">Consecutive days with at least one DM.</div><button class="ghost small" id="editT" style="margin-top:10px">Edit targets</button></div></div>`;
- h+=`<h2>Follow-ups due <span class="muted" style="font-size:20px">${due.length}</span></h2><div class="card list">`;
- h+=due.length?due.map(x=>`<div class="row between"><div><b>${esc(x.company)}</b> <span class="pill ${sCls(x.status)}">${esc(x.status)}</span><div class="small ${x.nextFollowUp<today()?'overdue':'muted'}">${x.nextFollowUp<today()?'Overdue since ':'Due '}${fmtDate(x.nextFollowUp)} · ${esc(x.decisionMaker||'')}</div></div><div class="row"><button class="ghost" data-open="${x.id}">Open</button><button class="primary" data-fu="${x.id}">Mark followed up</button></div></div>`).join(''):`<div class="muted">Nothing due. Add prospects or send new DMs.</div>`;
- h+=`</div><h2>Best send times</h2><div class="grid g3" id="clocks"></div>
- <p class="small muted" style="margin-top:8px">Highlighted when it's 8 to 11am, 1 to 3pm, or after 8pm there.</p>`;
+ let h='';
+ const item=(x,kind)=>{const late=kind==='fu'&&x.nextFollowUp<today();const c=fuCount(x);
+  const tag=kind==='fu'?`<span class="tag ${late?'late':'fu'}">${late?'Overdue follow-up':'Follow-up '+(c+1)+' of 3'}</span>`:`<span class="tag">First message</span>`;
+  const via=x.instagram?'Instagram':x.linkedin?'LinkedIn':x.email?'Email':x.website?'Website':'';
+  return`<div class="qi"><div class="row between"><button class="linkish" data-open="${x.id}"><b>${esc(x.company||'Untitled')}</b>${x.decisionMaker?` <span class="muted">· ${esc(x.decisionMaker)}</span>`:''}</button>${tag}</div>
+  ${x.problem?`<div class="why">${esc(x.problem)}</div>`:`<div class="why muted">No problem noted yet. <button class="linkish acc" data-open="${x.id}">Add one</button> so the message has something real in it.</div>`}
+  <div class="acts"><button class="primary" data-send="${x.id}" data-kind="${kind}">Message${via?' on '+via:''}</button>${kind==='fu'?`<button data-rep="${x.id}">They replied</button>`:''}</div></div>`};
+ if(!S.leads.length){h+=`<div class="card empty"><h3>Nobody to message yet</h3><p class="small muted">A lead is a brand you'd like to work with. Add the company, the person who runs it, where to reach them, and one thing you noticed about their brand.</p><div class="row" style="margin-top:14px"><button class="primary" id="addFirst">Add your first lead</button><button class="ghost" id="howTo">How this works</button></div></div>`}
+ else if(n){h+=`<div class="card list qlist">${Q.due.map(x=>item(x,'fu')).join('')}${Q.fresh.map(x=>item(x,'new')).join('')}</div>`;
+  if(Q.more&&!Q.left)h+=`<p class="small muted" style="margin-top:8px">Daily target hit. ${Q.more} more ${Q.more===1?'lead is':'leads are'} waiting for tomorrow.</p>`;
+  else if(Q.more)h+=`<p class="small muted" style="margin-top:8px">${Q.more} more waiting after these.</p>`}
+ else{h+=`<div class="card empty"><h3>${(l.dms||0)>=(S.targets.dms||5)?"Today's messages are done":'Nothing due today'}</h3><p class="small muted">${S.leads.some(x=>(x.status||STATUSES[0])===STATUSES[0])?'You hit your target. The rest wait for tomorrow.':'Everyone has been messaged and no follow-ups are due. Add a few more leads so tomorrow has something in it.'}</p><button class="primary" id="addFirst" style="margin-top:14px">Add a lead</button></div>`}
+ h+=`<h2>Today so far</h2><div class="mini">${METRICS.map(([k,nm])=>{const v=l[k]||0,t=S.targets[k]||1;return`<div class="card ${v>=t?'hit':''}"><div class="v">${v}<span class="muted" style="font-size:15px"> / ${t}</span></div><div class="k">${nm}</div></div>`}).join('')}</div>
+ <div class="row between" style="margin-top:10px"><span class="small muted">Fills in as you work. Log videos and calls on a lead's page.</span><button class="ghost small" id="editT">Targets</button></div>`;
+ h+=wk?`<div class="hero grain" style="margin-top:26px"><div class="row between"><div class="eyebrow acc">This week · ${wk.dates}</div><button class="circ" id="goPlan" title="Open plan">↗</button></div><div class="ttl">${wk.title}: ${wk.focus}</div><div class="bar"><i style="width:${wkTasks.length?wkDone/wkTasks.length*100:0}%"></i></div><div class="small dim" style="margin-bottom:6px">${wkDone} of ${wkTasks.length} done</div>${wkTasks.filter(t=>!t.done).slice(0,2).map(t=>`<div class="nx"><i></i>${esc(t.text)}</div>`).join('')}</div>`:'';
+ h+=`<div class="card stat orange grain" style="margin-top:14px"><div class="lbl">Messaging streak</div><div class="num">${st}<span class="muted" style="font-size:22px"> day${st===1?'':'s'}</span></div><div class="small muted" style="margin-top:6px">Days in a row you've sent at least one first message.</div></div>`;
+ h+=`<h2>Good time to message?</h2><div class="grid g3" id="clocks"></div><p class="small muted" style="margin-top:8px">Lights up when people there are likely checking their phones.</p>
+ <p style="margin-top:22px"><button class="ghost small" id="howTo2">How this app works</button></p>`;
  V(h);
- q('[data-b]').forEach(b=>b.onclick=()=>{bump(b.dataset.b);rToday()});
- q('[data-m]').forEach(b=>b.onclick=()=>{bump(b.dataset.m,-1);rToday()});
- q('[data-fu]').forEach(b=>b.onclick=()=>{markFU(b.dataset.fu);toast('Follow-up logged');rToday()});
+ q('[data-send]').forEach(b=>b.onclick=()=>sendMsg(b.dataset.send,b.dataset.kind));
+ q('[data-rep]').forEach(b=>b.onclick=()=>replied(b.dataset.rep));
  q('[data-open]').forEach(b=>b.onclick=()=>leadModal(b.dataset.open));
+ for(const i of['addFirst'])if(document.getElementById(i))document.getElementById(i).onclick=()=>leadModal();
+ for(const i of['howTo','howTo2'])if(document.getElementById(i))document.getElementById(i).onclick=intro;
+ {const gp=document.getElementById('goPlan');if(gp)gp.onclick=()=>{tab='plan';render()}}
  document.getElementById('editT').onclick=targetsModal;
  clocks();
 }
+function intro(){M(`<div class="row between"><h2 style="margin:0">How Outreach Desk works</h2><button class="ghost" data-close>Close</button></div>
+ <p class="muted" style="margin:12px 0 6px">You win clients by messaging brands directly, one at a time. This keeps it simple.</p>
+ <div class="steps"><div><b>1</b><div><h3>Add a lead</h3><p class="small muted">A brand you'd like to work with, the person who runs it, and one thing you noticed about their brand.</p></div></div>
+ <div><b>2</b><div><h3>Message them from Today</h3><p class="small muted">Tap Message. It copies your message, opens their profile, and logs it as sent. Paste, tweak, send.</p></div></div>
+ <div><b>3</b><div><h3>Follow up</h3><p class="small muted">Four days later they come back to Today by themselves. If they reply, tap They replied. After three follow-ups with no answer, they drop off.</p></div></div></div>
+ <p class="small muted">Everything is saved in this browser. Download a backup from Progress now and then.</p>
+ <div class="row" style="margin-top:16px"><button class="primary" id="introAdd">Add my first lead</button><button class="ghost" id="introOk">Got it</button></div>`);
+ S.onboarded=true;save();
+ document.getElementById('introAdd').onclick=()=>{closeM();leadModal()};document.getElementById('introOk').onclick=closeM}
 let clockT;function clocks(){clearInterval(clockT);const f=()=>{const el=document.getElementById('clocks');if(!el)return clearInterval(clockT);
  el.innerHTML=[['New York','America/New_York'],['London','Europe/London'],['Toronto','America/Toronto']].map(([c,z])=>{const now=new Date();const hr=+new Intl.DateTimeFormat('en-GB',{hour:'numeric',hourCycle:'h23',timeZone:z}).format(now);const live=(hr>=8&&hr<11)||(hr>=13&&hr<15)||hr>=20;
  return`<div class="card clock ${live?'live':''}"><div class="lbl small muted">${c}</div><div class="t">${now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:z})}</div><div class="small ${live?'overdue':'muted'}">${live?'Good time to send':'Wait'}</div></div>`}).join('')};f();clockT=setInterval(f,30000)}
@@ -241,13 +321,15 @@ function rLeads(){
  let h=`<div class="row between" style="margin:18px 0"><div class="row seg"><button data-v="board" class="${S.view==='board'?'on':''}">Board</button><button data-v="table" class="${S.view==='table'?'on':''}">Table</button></div>
  <div class="row"><button class="primary" id="addL">+ Add lead</button><button id="imp">Import CSV</button><button id="exp">Export CSV</button></div></div>
  <div class="row" style="margin-bottom:14px"><input id="fq" placeholder="Search leads" value="${esc(fq)}" style="flex:2;min-width:180px"><select id="fs" style="flex:1;min-width:150px"><option value="">All statuses</option>${STATUSES.map(s=>`<option ${s===fs?'selected':''}>${s}</option>`).join('')}</select></div>`;
- if(S.view==='board'){h+=`<div class="kanban">`+STATUSES.map(s=>{const ls=leads.filter(l=>(l.status||STATUSES[0])===s);return`<div class="col" data-col="${s}"><h3><span class="${sCls(s)}">${s}</span><span class="muted">${ls.length}</span></h3>${ls.map(l=>`<div class="lc" draggable="true" data-id="${l.id}"><b>${esc(l.company||'Untitled')}</b><div class="small muted">${esc(l.decisionMaker||'')}${l.country?' · '+esc(l.country):''}</div>${l.nextFollowUp?`<div class="small ${l.nextFollowUp<=today()?'overdue':'muted'}">Next: ${fmtDate(l.nextFollowUp)}</div>`:''}<select class="small mv" data-id="${l.id}" style="margin-top:8px;padding:6px">${STATUSES.map(x=>`<option ${x===s?'selected':''}>${x}</option>`).join('')}</select></div>`).join('')}</div>`}).join('')+`</div>`}
+ h+=S.leads.length?`<p class="small muted legend">Yet to reach out → Cold (messaged, no reply yet) → Warm (replied) → Hot (call booked) → Client</p>`:'';
+ if(!S.leads.length){h+=`<div class="card empty"><h3>No leads yet</h3><p class="small muted">A lead is a brand you'd like to work with. Add one at a time, or import the Lead Tracker sheet as a CSV.</p><button class="primary" id="addL2" style="margin-top:14px">Add your first lead</button></div>`}
+ else if(S.view==='board'){h+=`<div class="kanban">`+STATUSES.map(s=>{const ls=leads.filter(l=>(l.status||STATUSES[0])===s);return`<div class="col" data-col="${s}"><h3><span class="${sCls(s)}">${s}</span><span class="muted">${ls.length}</span></h3>${ls.map(l=>`<div class="lc" draggable="true" data-id="${l.id}"><b>${esc(l.company||'Untitled')}</b><div class="small muted">${esc(l.decisionMaker||'')}${l.country?' · '+esc(l.country):''}</div>${l.nextFollowUp?`<div class="small ${l.nextFollowUp<=today()?'overdue':'muted'}">Next: ${fmtDate(l.nextFollowUp)}</div>`:''}<select class="small mv" data-id="${l.id}" style="margin-top:8px;padding:6px">${STATUSES.map(x=>`<option ${x===s?'selected':''}>${x}</option>`).join('')}</select></div>`).join('')}</div>`}).join('')+`</div>`}
  else{h+=`<div class="card tablewrap"><table><tr><th>Company</th><th>Decision maker</th><th>Status</th><th>Country</th><th>Next follow-up</th><th>Brand problem</th></tr>${leads.map(l=>`<tr class="click" data-id="${l.id}"><td><b>${esc(l.company)}</b></td><td>${esc(l.decisionMaker)}<div class="small muted">${esc(l.role)}</div></td><td><span class="pill ${sCls(l.status)}">${esc(l.status)}</span></td><td>${esc(l.country)}</td><td class="${l.nextFollowUp&&l.nextFollowUp<=today()?'overdue':''}">${fmtDate(l.nextFollowUp)}</td><td class="small">${esc((l.problem||'').slice(0,90))}</td></tr>`).join('')||'<tr><td colspan="6" class="muted">No leads yet.</td></tr>'}</table></div>`}
  V(h);
  q('[data-v]').forEach(b=>b.onclick=()=>{S.view=b.dataset.v;save();rLeads()});
  const fqEl=document.getElementById('fq');fqEl.oninput=()=>{S.fq=fqEl.value;clearTimeout(fqEl._t);fqEl._t=setTimeout(()=>{rLeads();const e=document.getElementById('fq');e.focus();e.setSelectionRange(e.value.length,e.value.length)},300)};
  document.getElementById('fs').onchange=e=>{S.fs=e.target.value;rLeads()};
- document.getElementById('addL').onclick=()=>leadModal();
+ document.getElementById('addL').onclick=()=>leadModal();{const a2=document.getElementById('addL2');if(a2)a2.onclick=()=>leadModal()}
  document.getElementById('exp').onclick=exportCSV;
  document.getElementById('imp').onclick=()=>pickFile('.csv',importCSV);
  q('tr.click,.lc').forEach(e=>e.onclick=ev=>{if(ev.target.tagName!=='SELECT')leadModal(e.dataset.id)});
@@ -259,16 +341,17 @@ function setStatus(id,s){const x=S.leads.find(l=>l.id===id);if(!x||x.status===s)
 
 function leadModal(id){
  const x=id?S.leads.find(l=>l.id===id):{status:STATUSES[0],whereFound:SOURCES[0],activity:[]};
- const inp=(k,n,type='text',cls='')=>`<div class="${cls}"><label>${n}</label><input type="${type}" name="${k}" value="${esc(x[k]||'')}"></div>`;
+ const PH={company:'e.g. Glow Skincare',decisionMaker:'The person who runs it',role:'e.g. Founder',country:'e.g. UK',website:'https://',instagram:'@handle or profile link',linkedin:'Profile link',email:'name@brand.com'};
+ const inp=(k,n,type='text',cls='')=>`<div class="${cls}"><label>${n}</label><input type="${type}" name="${k}" placeholder="${PH[k]||''}" value="${esc(x[k]||'')}"></div>`;
  M(`<div class="row between"><h2 style="margin:0">${id?esc(x.company||'Lead'):'New lead'}</h2><button class="ghost" data-close>Close</button></div>
  <form id="lf"><div class="fgrid">${inp('company','Company')}${inp('decisionMaker','Decision maker')}${inp('role','Role')}${inp('country','Country')}${inp('website','Website')}${inp('instagram','Instagram')}${inp('linkedin','LinkedIn')}${inp('email','Email','email')}
  <div><label>Where found</label><select name="whereFound">${SOURCES.map(s=>`<option ${s===x.whereFound?'selected':''}>${s}</option>`).join('')}</select></div>
  <div><label>Status</label><select name="status">${STATUSES.map(s=>`<option ${s===x.status?'selected':''}>${s}</option>`).join('')}</select></div>
- <div class="full"><label>Brand problem spotted</label><textarea name="problem">${esc(x.problem||'')}</textarea></div>
+ <div class="full"><label>Brand problem spotted</label><textarea name="problem" placeholder="What feels off about their brand? e.g. the ad and the website look like two different companies">${esc(x.problem||'')}</textarea></div>
  ${inp('firstContact','First contact','date')}${inp('lastFollowUp','Last follow-up','date')}${inp('nextFollowUp','Next follow-up','date')}<div></div>
  <div class="full"><label>Notes</label><textarea name="notes">${esc(x.notes||'')}</textarea></div></div>
  <div class="row between" style="margin-top:18px"><div>${id?'<button type="button" class="ghost" id="delL" style="color:var(--acc2)">Delete</button>':''}</div><button class="primary" type="submit">Save lead</button></div></form>
- ${id?`<h3 style="margin-top:24px">Log activity</h3><div class="row" style="margin:10px 0">${['DM sent','Follow-up','Loom sent','Reply','Call','Note'].map(a=>`<button class="small" data-act="${a}">${a}</button>`).join('')}</div>
+ ${id?`<h3 style="margin-top:24px">Log activity</h3><div class="row" style="margin:10px 0">${['DM sent','Follow-up','Video audit sent','Reply','Call','Note'].map(a=>`<button class="small" data-act="${a}">${a}</button>`).join('')}</div>
  <div>${(x.activity||[]).map(a=>`<div class="tl"><b>${esc(a.type)}</b> <span class="muted">${fmtDate(a.date)}</span>${a.note?' · '+esc(a.note):''}</div>`).join('')||'<div class="muted small">No activity yet.</div>'}</div>`:''}`);
  document.getElementById('lf').onsubmit=e=>{e.preventDefault();const fd=new FormData(e.target),o=Object.fromEntries(fd);
   if(!o.company.trim())return toast('Add a company name');
@@ -281,7 +364,7 @@ function leadModal(id){
    act(x,a,note);
    if(a==='DM sent'){bump('dms');if(!x.firstContact)x.firstContact=t;if(x.status===STATUSES[0])x.status='Cold';x.nextFollowUp=addDays(t,4)}
    if(a==='Follow-up'){bump('followups');x.lastFollowUp=t;x.nextFollowUp=addDays(t,4)}
-   if(a==='Loom sent')bump('looms');
+   if(a==='Video audit sent'||a==='Loom sent')bump('looms');
    if(a==='Reply'){bump('replies');if(['Yet to reach out','Cold'].includes(x.status))x.status='Warm'}
    if(a==='Call'){bump('calls');if(x.status!=='Client')x.status='Hot'}
    save();toast(a+' logged');leadModal(id);render()})}
@@ -313,7 +396,7 @@ function rStats(){
  const days=[...Array(30)].map((_,i)=>addDays(today(),i-29));
  const tot=k=>days.reduce((a,d)=>a+(S.logs[d]?.[k]||0),0);
  const dms=tot('dms'),rep=tot('replies');
- let h=`<div class="grid g3" style="margin-top:18px">${[['DMs (30 days)',dms],['Follow-ups',tot('followups')],['Replies',rep],['Calls',tot('calls')],['Reply rate',dms?Math.round(rep/dms*100)+'%':'–'],['Total leads',S.leads.length]].map(([n,v])=>`<div class="card stat"><div class="lbl">${n}</div><div class="num">${v}</div></div>`).join('')}</div>
+ let h=(!S.leads.length&&!dms?`<div class="card empty" style="margin-top:18px"><h3>Nothing to show yet</h3><p class="small muted">Your numbers show up here once you start adding leads and messaging.</p></div>`:'')+`<div class="grid g3" style="margin-top:18px">${[['Messages (30 days)',dms],['Follow-ups',tot('followups')],['Replies',rep],['Calls',tot('calls')],['Reply rate',dms?Math.round(rep/dms*100)+'%':'–'],['Total leads',S.leads.length]].map(([n,v])=>`<div class="card stat"><div class="lbl">${n}</div><div class="num">${v}</div></div>`).join('')}</div>
  <h2>Last 30 days</h2><div class="card"><canvas id="ch" height="260"></canvas><div class="row small" style="margin-top:10px;gap:16px"><span><b style="color:#D1F366">■</b> DMs</span><span><b style="color:#4B66E0">■</b> Follow-ups</span><span><b style="color:#62DA83">■</b> Replies</span><span><b style="color:#9EA2A8">■</b> Calls</span></div></div>
  <div class="grid g2"><div><h2>Pipeline</h2><div class="card list">${STATUSES.map(s=>{const n=S.leads.filter(l=>(l.status||STATUSES[0])===s).length;return`<div class="row between"><span class="${sCls(s)}">${s}</span><b>${n}</b></div>`}).join('')}</div></div>
  <div><h2>Leads added per week</h2><div class="card list">${[...Array(6)].map((_,i)=>{const end=addDays(today(),-7*i),start=addDays(end,-6);const n=S.leads.filter(l=>l.created&&l.created>=start&&l.created<=end).length;return`<div class="row between"><span>${fmtDate(start)} to ${fmtDate(end)}</span><b>${n}</b></div>`}).join('')}</div></div></div>
@@ -333,7 +416,7 @@ function drawChart(days){const c=document.getElementById('ch');const dpr=window.
   if(i%5===4||i===29){x.fillStyle='#9EA2A8';x.fillText(fmtDate(d),pl+i*cw-10,H-6)}})}
 
 function rScripts(){
- let h=`<div class="row between" style="margin:18px 0"><p class="muted small">Adapt each one to the brand. Never paste them as is.</p><button class="primary" id="addS">+ Add script</button></div><div class="grid g2">`+
+ let h=`<div class="row between" style="margin:18px 0"><p class="muted small" style="max-width:520px">Today picks the right one for you: a first message, then follow-up 1, 2 and 3. [Company] fills in automatically. Edit the rest so it sounds like you.</p><button class="primary" id="addS">+ Add script</button></div><div class="grid g2">`+
  S.scripts.map(s=>`<div class="card"><div class="row between"><h3>${esc(s.title)}</h3><div class="row"><button class="small ghost" data-es="${s.id}">Edit</button></div></div><p class="script" style="margin:10px 0 14px">${esc(s.body)}</p><button class="primary small" data-cp="${s.id}">Copy</button></div>`).join('')+`</div>`;
  V(h);
  document.getElementById('addS').onclick=()=>scriptModal();
@@ -368,6 +451,7 @@ function dl(name,data,type){const a=document.createElement('a');a.href=URL.creat
 function pickFile(acc,cb){const f=document.getElementById('fileIn');f.accept=acc;f.value='';f.onchange=()=>{const file=f.files[0];if(!file)return;const r=new FileReader();r.onload=()=>cb(r.result);r.readAsText(file)};f.click()}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!document.getElementById('modal').classList.contains('on'))render()});
 render();
+if(!S.onboarded)setTimeout(intro,400);
 </script>
 </body>
 </html>
