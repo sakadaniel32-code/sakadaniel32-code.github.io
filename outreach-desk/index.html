@@ -11,126 +11,146 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#FAFAF8;--white:#FFFFFF;--ink:#0A0A0A;--text:#141414;--muted:#77736C;--line:#E7E4DE;--soft:#F3F1EC;--acc:#F05E1C;--acc2:#D94E10;--ok:#2F7D4F}
+:root{--bg:#F1F0EB;--white:#FFFFFF;--ink:#0A0A0A;--ink2:#1C1C1C;--text:#141414;--muted:#7A766F;--line:#E6E3DC;--soft:#ECEAE4;--acc:#F05E1C;--acc2:#D94E10;--ok:#2F7D4F;--r:24px}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
-body{min-height:100vh;padding-bottom:90px}
-h1,h2,h3,.disp{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;letter-spacing:.01em;color:var(--ink)}
-h1{font-size:64px;line-height:.92}
-h2{font-size:34px;line-height:1;margin:44px 0 16px}
-h3{font-size:22px}
+body{min-height:100vh;padding-bottom:130px}
+h1,h2,h3{font-family:'DM Sans',sans-serif;color:var(--ink);letter-spacing:-.02em}
+h1{font-size:40px;line-height:1.08;font-weight:600;max-width:560px}
+h2{font-size:21px;font-weight:600;margin:38px 0 14px;display:flex;align-items:center;gap:10px}
+h3{font-size:17px;font-weight:600}
+.disp,.num,.t{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;letter-spacing:.01em}
 a{color:var(--acc)}
-.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
-.dark{background:var(--ink);color:#F2EFEA;position:relative;overflow:hidden}
-.dark::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.09;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.dark h1,.dark h2,.dark h3,.dark .disp{color:#F2EFEA}
-.dark .muted{color:#9C978F}
-header.top{padding:26px 0 30px;position:relative;z-index:1}
-.toprow{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}
-.brand{font-family:'Bebas Neue';font-size:18px;letter-spacing:.18em;color:#F2EFEA}
-.brand b{color:var(--acc);font-weight:400}
-.titlerow{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
-.muted{color:var(--muted)}
-.small{font-size:13px}
-.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);font-weight:600}
-main{counter-reset:sec;padding-top:36px}
-main h2::before{counter-increment:sec;content:counter(sec,decimal-leading-zero);font-family:'DM Sans';font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--acc);display:block;margin-bottom:8px}
-nav.tabs{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
-nav.tabs button{flex:1;max-width:170px;background:none;border:0;border-radius:0;color:var(--muted);font-family:'Bebas Neue';font-size:19px;letter-spacing:.08em;padding:17px 4px 15px;cursor:pointer;border-top:2px solid transparent;margin-top:-1px}
-nav.tabs button.on{color:var(--ink);border-top-color:var(--acc)}
-@media(min-width:900px){body{padding-bottom:40px}nav.tabs{position:static;background:none;backdrop-filter:none;border:0;justify-content:flex-end;gap:30px}nav.tabs button{flex:none;color:#9C978F;padding:4px 0;border-top:0;border-bottom:2px solid transparent;font-size:18px;margin:0}nav.tabs button.on{color:#F2EFEA;border-bottom-color:var(--acc)}nav.tabs button:hover{color:#F2EFEA}}
-.grid{display:grid;gap:14px}
-.g3{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
-.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 28px}
-.card{background:var(--white);border:1px solid var(--line);border-radius:2px;padding:20px}
-.stat .num{font-family:'Bebas Neue';font-size:54px;line-height:.95;color:var(--ink)}
-.stat .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:600;margin-bottom:6px}
-.stat.hit{border-top:2px solid var(--acc)}
-.bar{height:3px;background:var(--soft);overflow:hidden;margin:14px 0}
-.bar i{display:block;height:100%;background:var(--ink);transition:width .3s}
-.bar.done i{background:var(--acc)}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+.grain{position:relative;overflow:hidden}
+.grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.08;border-radius:inherit;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+header.top{padding:26px 0 22px}
+.toprow{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
+.who{display:flex;align-items:center;gap:12px}
+.av{width:48px;height:48px;border-radius:50%;background:var(--ink);color:var(--acc);display:grid;place-items:center;font-family:'Bebas Neue';font-size:24px}
+.who .hi{font-size:13px;color:var(--muted);line-height:1.2}.who .nm{font-weight:600;font-size:18px;line-height:1.2}
+.datepill{background:var(--white);border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:13px;color:var(--muted)}
+.muted{color:var(--muted)}.small{font-size:13px}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.14em;font-weight:700;color:var(--muted)}
+main{padding-top:4px}
+nav.tabs{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);border-radius:999px;display:flex;gap:8px;padding:8px;z-index:50;box-shadow:0 18px 40px rgba(10,10,10,.28)}
+nav.tabs button{width:54px;height:54px;border-radius:50%;background:var(--ink2);border:0;color:#B9B4AC;display:grid;place-items:center;padding:0;cursor:pointer;transition:all .2s}
+nav.tabs button svg{width:21px;height:21px}
+nav.tabs button:hover{color:#fff;border:0}
+nav.tabs button.on{background:var(--acc);color:var(--ink)}
+.grid{display:grid;gap:12px}
+.g3{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.stat{display:flex;flex-direction:column}
+.stat .num{font-size:50px;line-height:.95;color:var(--ink)}
+.stat .lbl{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.stat .row.ctl,.stat>.row:last-child{margin-top:auto}
+.stat.hit{background:var(--ink);border-color:var(--ink)}.stat.hit .lbl,.stat.hit .num{color:#F2EFEA}.stat.hit .muted{color:#9C978F}
+.stat.hit .bar{background:#2a2a2a}.stat.hit .minus{background:#1f1f1f;border-color:#333;color:#9C978F}
+.stat.orange{background:var(--acc);border-color:var(--acc)}.stat.orange .lbl,.stat.orange .num,.stat.orange .muted,.stat.orange .small{color:#fff}
+.stat.orange button{background:rgba(255,255,255,.2);border-color:transparent;color:#fff}
+.bar{height:6px;background:var(--soft);border-radius:9px;overflow:hidden;margin:12px 0}
+.bar i{display:block;height:100%;background:var(--ink);border-radius:9px;transition:width .3s}
+.bar.done i,.stat.hit .bar i{background:var(--acc)}
 .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .between{justify-content:space-between}
-button,.btn{background:var(--white);color:var(--ink);border:1px solid var(--line);border-radius:2px;padding:10px 16px;font:inherit;font-weight:600;font-size:14px;cursor:pointer;transition:all .15s}
+button,.btn{background:var(--white);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:10px 18px;font:inherit;font-weight:600;font-size:14px;cursor:pointer;transition:all .15s}
 button:hover{border-color:var(--ink)}
 .primary{background:var(--acc);border-color:var(--acc);color:#fff}
 .primary:hover{background:var(--acc2);border-color:var(--acc2)}
-.ink{background:var(--ink);border-color:var(--ink);color:#fff}
-.ink:hover{background:var(--acc);border-color:var(--acc)}
 .ghost{background:none;border-color:transparent}
 .ghost:hover{border-color:var(--line)}
-.plus{font-size:15px;padding:7px 18px}
-.minus{padding:7px 12px;color:var(--muted)}
-input,select,textarea{width:100%;background:var(--white);color:var(--text);border:1px solid var(--line);border-radius:2px;padding:11px 12px;font:inherit}
+.plus{width:46px;height:46px;padding:0;border-radius:50%;font-size:15px}
+.minus{width:38px;height:38px;padding:0;border-radius:50%;color:var(--muted)}
+.circ{width:38px;height:38px;border-radius:50%;padding:0;display:grid;place-items:center;font-size:16px}
+input,select,textarea{width:100%;background:var(--white);color:var(--text);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font:inherit}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink)}
 textarea{min-height:84px;resize:vertical}
-label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:600;margin:14px 0 6px}
-.banner{position:relative;z-index:1;border-top:1px solid #262626;padding:18px 0 0;margin-top:26px}
-.banner .disp{font-size:24px}
+label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin:14px 0 6px}
+.hero{background:var(--ink);color:#F2EFEA;border-radius:30px;padding:24px;margin-bottom:14px}
+.hero .ttl{font-size:26px;font-weight:600;letter-spacing:-.02em;margin:6px 0 2px}
+.hero .bar{background:#2a2a2a}.hero .bar i{background:var(--acc)}
+.hero .circ{background:#1f1f1f;border-color:#333;color:#F2EFEA}.hero .circ:hover{background:var(--acc);border-color:var(--acc)}
+.hero .nx{display:flex;gap:12px;align-items:center;padding:12px 0;border-top:1px solid #222;font-size:14px}
+.hero .nx i{width:8px;height:8px;border-radius:50%;background:var(--acc);flex:none}
+.hero .dim{color:#9C978F}
+.acc{color:var(--acc)!important}
+.list{padding:6px 20px}
 .list>div{border-bottom:1px solid var(--line);padding:14px 0}
-.list>div:first-child{padding-top:0}.list>div:last-child{border-bottom:0;padding-bottom:0}
+.list>div:last-child{border-bottom:0}
 .overdue{color:var(--acc)}
-.pill{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;padding:3px 9px;border:1px solid var(--line);border-radius:20px;color:var(--muted);vertical-align:middle}
-.s-Yet{color:#6d6862}.s-Cold{color:#3E6A93;border-color:#cfdce8}.s-Warm{color:#B5761A;border-color:#ecdcc0}.s-Hot{color:var(--acc);border-color:#f6cdb7}.s-Client{color:var(--ok);border-color:#c5dfcf}.s-Not{color:#aaa}
-.clock{padding:16px}.clock.live{border-color:var(--ink);background:var(--ink);color:#F2EFEA}.clock.live .t{color:#F2EFEA}.clock.live .muted{color:#9C978F}
-.clock .t{font-family:'Bebas Neue';font-size:36px;color:var(--ink);line-height:1.1}
+.pill{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--soft);color:var(--muted);vertical-align:middle}
+.s-Yet{color:#6d6862}.s-Cold{color:#3E6A93}.s-Warm{color:#B5761A}.s-Hot{color:var(--acc)}.s-Client{color:var(--ok)}.s-Not{color:#aaa}
+.pill.s-Hot{background:#FDE7DC}.pill.s-Client{background:#DDEEE3}.pill.s-Warm{background:#F6EBD7}.pill.s-Cold{background:#E1EAF2}
+.clock{padding:18px}.clock.live{border-color:var(--ink);background:var(--ink);color:#F2EFEA}.clock.live .t{color:#F2EFEA}.clock.live .muted{color:#9C978F}
+.clock .t{font-size:38px;color:var(--ink);line-height:1.1}
 .kanban{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(240px,1fr);gap:12px;overflow-x:auto;padding-bottom:10px}
-.col{background:var(--soft);border:1px solid var(--line);border-radius:2px;padding:12px;min-height:240px}
-.col.drag{border-color:var(--acc);background:#FFF6F1}
-.col h3{font-size:19px;margin-bottom:10px;display:flex;justify-content:space-between}
-.lc{background:var(--white);border:1px solid var(--line);border-radius:2px;padding:12px;margin-bottom:8px;cursor:grab;transition:border-color .15s}
+.col{background:var(--soft);border-radius:22px;padding:12px;min-height:240px}
+.col.drag{outline:2px solid var(--acc);background:#FFF3EC}
+.col h3{font-size:15px;margin:4px 6px 12px;display:flex;justify-content:space-between}
+.lc{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:8px;cursor:grab;transition:border-color .15s}
 .lc:hover{border-color:var(--ink)}
-.lc b{display:block;font-weight:700}
+.lc b{display:block;font-weight:600}
 table{width:100%;border-collapse:collapse;font-size:14px}
 th,td{text-align:left;padding:13px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:700}
+tr:last-child td{border-bottom:0}
+th{font-size:11px;color:var(--muted);font-weight:600}
 tr.click{cursor:pointer}tr.click:hover td{background:var(--bg)}
-.tablewrap{overflow-x:auto;padding:6px 14px}
-.modal{position:fixed;inset:0;background:rgba(10,10,10,.55);display:none;align-items:flex-start;justify-content:center;z-index:100;overflow-y:auto;padding:36px 12px}
+.tablewrap{overflow-x:auto;padding:8px 14px}
+.modal{position:fixed;inset:0;background:rgba(10,10,10,.5);display:none;align-items:flex-start;justify-content:center;z-index:100;overflow-y:auto;padding:36px 12px}
 .modal.on{display:flex}
-.sheet{background:var(--white);border-radius:2px;width:100%;max-width:740px;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.25)}
-.sheet h2{margin:0}.sheet h2::before{display:none}
-.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.sheet{background:var(--white);border-radius:30px;width:100%;max-width:720px;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.25)}
+.sheet h2{margin:0}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
 .fgrid .full{grid-column:1/-1}
-@media(max-width:620px){.fgrid{grid-template-columns:1fr}h1{font-size:50px}h2{font-size:30px}.sheet{padding:22px}}
+@media(max-width:620px){.fgrid{grid-template-columns:1fr}h1{font-size:32px}.sheet{padding:22px}nav.tabs button{width:50px;height:50px}}
 .task{display:flex;gap:14px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--line)}
 .task:last-of-type{border-bottom:0}
-.task input{width:18px;height:18px;accent-color:var(--acc);flex:none;margin-top:3px}
+.task input{width:20px;height:20px;accent-color:var(--acc);flex:none;margin-top:2px}
 .task.done span{color:var(--muted);text-decoration:line-through}
 .task .x{margin-left:auto;padding:0 8px;color:var(--muted);background:none;border:0}
 .script{white-space:pre-wrap;color:#333}
-.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:2px;font-weight:600;font-size:14px;opacity:0;transition:opacity .2s;z-index:200;pointer-events:none;border-left:3px solid var(--acc)}
+.toast{position:fixed;bottom:104px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:999px;font-weight:600;font-size:14px;opacity:0;transition:opacity .2s;z-index:200;pointer-events:none}
 .toast.on{opacity:1}
-.seg{gap:0}.seg button{border-radius:0;margin-left:-1px}
-.seg button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.seg{background:var(--white);border:1px solid var(--line);border-radius:999px;padding:4px;gap:2px}
+.seg button{border:0;background:none;padding:8px 18px}
+.seg button.on{background:var(--acc);color:#fff}
 .tl{font-size:13px;border-left:2px solid var(--line);padding:5px 0 5px 14px;margin-left:4px}
-.tl b{font-weight:700}
+.tl b{font-weight:600}
 canvas{width:100%;display:block}
-.legend b{display:inline-block;width:10px;height:10px;margin-right:6px;vertical-align:middle}
-footer.dark{margin-top:60px;padding:34px 0}
-footer .brand{font-size:16px}
+.cal{background:var(--acc);border-radius:30px;padding:24px;color:#fff;margin-top:6px}
+.cal .mon{font-size:30px;font-weight:600;letter-spacing:-.02em;margin:2px 0 16px}
+.cal .grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;text-align:center}
+.cal .wd{font-size:11px;font-weight:700;letter-spacing:.06em;opacity:.85}
+.cal .d{aspect-ratio:1;max-width:48px;margin:0 auto;width:100%;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:600;background:rgba(10,10,10,.16)}
+.cal .d.act{background:var(--ink);color:#fff}
+.cal .d.today{background:#fff;color:var(--ink)}
+.cal .d.fut{background:none;border:1.5px dashed rgba(255,255,255,.55)}
+.cal .d.out{opacity:.3}
+.cal .leg{display:flex;gap:16px;font-size:12px;margin-top:16px;flex-wrap:wrap}
+.cal .leg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+footer.foot{text-align:center;margin-top:50px}
 .hide{display:none!important}
 </style>
 </head>
 <body>
-<div class="dark"><div class="wrap">
-<header class="top">
-  <div class="toprow"><div class="brand">OUTREACH <b>DESK</b></div>
-  <nav class="tabs">
-  <button data-tab="today" class="on">Today</button>
-  <button data-tab="leads">Leads</button>
-  <button data-tab="plan">Plan</button>
-  <button data-tab="stats">Stats</button>
-  <button data-tab="scripts">Scripts</button>
-  </nav></div>
-  <div class="titlerow"><h1 id="pageTitle">Today</h1><div class="muted small" id="todayDate"></div></div>
-  <div id="heroExtra"></div>
-</header>
-</div></div>
 <div class="wrap">
+<header class="top">
+  <div class="toprow"><div class="who"><div class="av">D</div><div><div class="hi">Hello</div><div class="nm">Daniel</div></div></div><div class="datepill" id="todayDate"></div></div>
+  <h1 id="pageTitle">Ready for today's outreach?</h1>
+</header>
+<div id="heroExtra"></div>
 <main id="view"></main>
+<footer class="foot small muted">Outreach Desk · Desyner · Zyner Limited</footer>
 </div>
-<footer class="dark"><div class="wrap row between" style="position:relative;z-index:1"><div class="brand">OUTREACH <b>DESK</b></div><div class="small muted">Desyner · Zyner Limited</div></div></footer>
+<nav class="tabs">
+  <button data-tab="today" title="Today" aria-label="Today" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg></button>
+  <button data-tab="leads" title="Leads" aria-label="Leads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.6"/><path d="M17.5 14.6c2.3.3 3.7 1.9 4 4.4"/></svg></button>
+  <button data-tab="plan" title="Plan" aria-label="Plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></button>
+  <button data-tab="stats" title="Stats" aria-label="Stats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V12M10 20V5M15 20v-9M20 20v-5"/></svg></button>
+  <button data-tab="scripts" title="Scripts" aria-label="Scripts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-5 4.5V16a2.5 2.5 0 0 1-1-2z"/></svg></button>
+</nav>
 <div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
 <div class="toast" id="toast"></div>
 <input type="file" id="fileIn" class="hide">
@@ -174,8 +194,8 @@ let tab='today';
 document.querySelectorAll('nav.tabs button').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;render()});
 function render(){
  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));
- document.getElementById('pageTitle').textContent={today:'Today',leads:'Leads',plan:'30-day plan',stats:'Stats',scripts:'Scripts'}[tab];
- document.getElementById('todayDate').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:TZ})+' · Lagos';
+ document.getElementById('pageTitle').textContent={today:"Ready for today's outreach?",leads:'Your pipeline',plan:'Your 30-day plan',stats:'Statistics',scripts:'Message scripts'}[tab];
+ document.getElementById('todayDate').textContent=new Date().toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:TZ})+' · Lagos';
  document.getElementById('heroExtra').innerHTML='';
  ({today:rToday,leads:rLeads,plan:rPlan,stats:rStats,scripts:rScripts})[tab]();
  window.scrollTo(0,0);
@@ -187,12 +207,12 @@ function dueLeads(){const t=today();return S.leads.filter(l=>l.nextFollowUp&&l.n
 function rToday(){
  const l=log(),wk=currentWeek(),due=dueLeads(),st=streak();
  const wkTasks=wk?S.plan.filter(t=>t.week===wk.w):[];const wkDone=wkTasks.filter(t=>t.done).length;
- let hb=wk?`<div class="banner"><div class="row between"><div><div class="eyebrow" style="color:var(--acc);margin-bottom:4px">This week</div><span class="disp">${wk.title} · ${wk.focus}</span> <span class="muted small">${wk.dates}</span></div><span class="small muted">${wkDone}/${wkTasks.length} done</span></div>${wkTasks.filter(t=>!t.done).slice(0,2).map(t=>`<div class="small" style="margin-top:6px">Next: ${esc(t.text)}</div>`).join('')}</div>`:`<div class="banner">30-day plan complete window. Keep the rhythm going.</div>`;
- document.getElementById('heroExtra').innerHTML=hb;let h='';
+ let hb=wk?`<div class="hero grain"><div class="row between"><div class="eyebrow acc">This week · ${wk.dates}</div><button class="circ" id="goPlan" title="Open plan">↗</button></div><div class="ttl">${wk.title}: ${wk.focus}</div><div class="bar"><i style="width:${wkTasks.length?wkDone/wkTasks.length*100:0}%"></i></div><div class="small dim" style="margin-bottom:6px">${wkDone} of ${wkTasks.length} done</div>${wkTasks.filter(t=>!t.done).slice(0,2).map(t=>`<div class="nx"><i></i>${esc(t.text)}</div>`).join('')}</div>`:`<div class="hero grain"><div class="ttl">The 30-day window is over. Keep the rhythm going.</div></div>`;
+ document.getElementById('heroExtra').innerHTML=hb;{const gp=document.getElementById('goPlan');if(gp)gp.onclick=()=>{tab='plan';render()}}let h='';
  h+=`<div class="grid g3">`;
  for(const[k,n]of METRICS){const v=l[k]||0,t=S.targets[k]||1,p=Math.min(100,v/t*100);
-  h+=`<div class="card stat"><div class="lbl">${n}</div><div class="row between"><div class="num">${v}<span class="muted" style="font-size:22px"> / ${t}</span></div></div><div class="bar ${v>=t?'done':''}"><i style="width:${p}%"></i></div><div class="row"><button class="primary plus" data-b="${k}">+1</button><button class="minus" data-m="${k}">−</button></div></div>`}
- h+=`<div class="card stat"><div class="lbl">DM streak</div><div class="num">${st}<span class="muted" style="font-size:22px"> day${st===1?'':'s'}</span></div><div class="small muted" style="margin-top:8px">Consecutive days with at least one DM.</div><button class="ghost small" id="editT" style="margin-top:10px">Edit targets</button></div></div>`;
+  h+=`<div class="card stat ${v>=t?'hit':''}"><div class="lbl">${n}</div><div class="row between"><div class="num">${v}<span class="muted" style="font-size:22px"> / ${t}</span></div></div><div class="bar ${v>=t?'done':''}"><i style="width:${p}%"></i></div><div class="row ctl"><button class="primary plus" data-b="${k}">+1</button><button class="minus" data-m="${k}">−</button></div></div>`}
+ h+=`<div class="card stat orange grain"><div class="lbl">DM streak</div><div class="num">${st}<span class="muted" style="font-size:22px"> day${st===1?'':'s'}</span></div><div class="small muted" style="margin-top:8px">Consecutive days with at least one DM.</div><button class="ghost small" id="editT" style="margin-top:10px">Edit targets</button></div></div>`;
  h+=`<h2>Follow-ups due <span class="muted" style="font-size:20px">${due.length}</span></h2><div class="card list">`;
  h+=due.length?due.map(x=>`<div class="row between"><div><b>${esc(x.company)}</b> <span class="pill ${sCls(x.status)}">${esc(x.status)}</span><div class="small ${x.nextFollowUp<today()?'overdue':'muted'}">${x.nextFollowUp<today()?'Overdue since ':'Due '}${fmtDate(x.nextFollowUp)} · ${esc(x.decisionMaker||'')}</div></div><div class="row"><button class="ghost" data-open="${x.id}">Open</button><button class="primary" data-fu="${x.id}">Mark followed up</button></div></div>`).join(''):`<div class="muted">Nothing due. Add prospects or send new DMs.</div>`;
  h+=`</div><h2>Best send times</h2><div class="grid g3" id="clocks"></div>
@@ -266,9 +286,15 @@ function leadModal(id){
 function targetsModal(){M(`<div class="row between"><h2 style="margin:0">Daily targets</h2><button class="ghost" data-close>Close</button></div><form id="tf"><div class="fgrid">${METRICS.map(([k,n])=>`<div><label>${n}</label><input type="number" min="1" name="${k}" value="${S.targets[k]}"></div>`).join('')}</div><button class="primary" style="margin-top:16px">Save</button></form>`);
  document.getElementById('tf').onsubmit=e=>{e.preventDefault();for(const[k,v]of new FormData(e.target))S.targets[k]=Math.max(1,+v||1);save();closeM();render()}}
 
+function calHTML(){const t=today();const [Y,Mo]=t.split('-').map(Number);const first=new Date(Date.UTC(Y,Mo-1,1));const dim=new Date(Date.UTC(Y,Mo,0)).getUTCDate();const lead=(first.getUTCDay()+6)%7;
+ const ps=PLAN[0].start,pe=PLAN[PLAN.length-1].end;let cells='';for(let i=0;i<lead;i++)cells+='<div></div>';
+ for(let d=1;d<=dim;d++){const ds=`${Y}-${String(Mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const inP=ds>=ps&&ds<=pe;let c='d';
+  if(ds===t)c+=' today';else if(ds>t)c+=inP?' fut':' out';else if(S.logs[ds]?.dms>0)c+=' act';else if(!inP)c+=' out';cells+=`<div class="${c}">${d}</div>`}
+ const mn=first.toLocaleDateString('en-GB',{month:'long',timeZone:'UTC'});
+ return `<div class="cal grain"><div class="eyebrow" style="color:#fff;opacity:.85">${Y}</div><div class="mon">${mn}</div><div class="grid7">${['MON','TUE','WED','THU','FRI','SAT','SUN'].map(w=>`<div class="wd">${w}</div>`).join('')}${cells}</div><div class="leg"><span><i style="background:#0A0A0A"></i>Days you sent DMs</span><span><i style="background:#fff"></i>Today</span><span><i style="border:1.5px dashed #fff"></i>Plan days ahead</span></div></div>`}
 function rPlan(){
  const all=S.plan.length,done=S.plan.filter(t=>t.done).length;
- let h=`<div class="card" style="margin-top:18px"><div class="row between"><span class="disp" style="font-size:22px">Overall</span><span>${done}/${all} · ${all?Math.round(done/all*100):0}%</span></div><div class="bar ${done===all&&all?'done':''}"><i style="width:${all?done/all*100:0}%"></i></div></div>`;
+ let h=calHTML()+`<div class="card" style="margin-top:14px"><div class="row between"><h3>Overall</h3><span>${done}/${all} · ${all?Math.round(done/all*100):0}%</span></div><div class="bar ${done===all&&all?'done':''}"><i style="width:${all?done/all*100:0}%"></i></div></div>`;
  const wk=currentWeek();
  for(const p of PLAN){const ts=S.plan.filter(t=>t.week===p.w),d=ts.filter(t=>t.done).length;
   h+=`<h2 ${wk&&wk.w===p.w?'style="color:var(--acc)"':''}>${p.title} · ${p.focus} <span class="muted" style="font-size:18px">${p.dates}</span></h2><div class="card"><div class="bar ${d===ts.length&&ts.length?'done':''}"><i style="width:${ts.length?d/ts.length*100:0}%"></i></div>
