@@ -147,6 +147,8 @@ footer { text-align:center; color:#9aa3af; font-size:12.5px; margin-top:34px; }
         <div class="stat"><div class="k">Money out</div><div class="v out" id="stOut"></div></div>
         <div class="stat"><div class="k">What's left</div><div class="v" id="stNet"></div></div>
       </div>
+      <div class="mut" id="internalNote" style="margin:-4px 0 12px; font-size:12.5px;"></div>
+      <div class="mut" id="internalNote" style="margin:-4px 0 12px; font-size:12.5px;"></div>
       <div class="grid2">
         <div class="donutwrap">
           <canvas id="donut" width="260" height="260"></canvas>
@@ -194,23 +196,31 @@ footer { text-align:center; color:#9aa3af; font-size:12.5px; margin-top:34px; }
 <script>
 /* Nibo core logic (DOM-free) */
 var CATS = [
-  { id: 'tithes',    label: 'Tithes & Givings',     color: '#8b5cf6', keywords: ['tithe','tithes','offering','seed','sowing','church','donation','ministry','first fruit','thanksgiving','alms','giving'] },
-  { id: 'feeding',   label: 'Feeding',              color: '#f59e0b', keywords: ['food','restaurant','supermart','supermarket','market','kitchen','buka','canteen','eatery','chicken republic','kilimanjaro','mama put','justrite','domino','kfc','shoprite','price point','grill','pizza','amala','grocer','provision','depot','confection','cakes','shawarma','suya','mallam','pepper soup','jollof'] },
-  { id: 'transport', label: 'Transport & Fuel',     color: '#3b82f6', keywords: ['fuel','petrol','pms','nnpc','oando','conoil','filling station','transport','bolt','uber','indrive','lagride','gokada','okada','danfo','lagbus','brt','parking','toll','lloyd taxi','ride'] },
-  { id: 'utilities', label: 'Utilities & Electricity', color: '#06b6d4', keywords: ['electric','ekedc','ikedc','aedc','ibedc','jedc','kaedco','kedco','phcn','disco','token','power','water corp','water board','prepaid','nepa','waste mgmt','lawma'] },
-  { id: 'airtime',   label: 'Airtime & Data',       color: '#ec4899', keywords: ['mtn','glo','airtel','9mobile','etisalat','vtu','airtime','data bundle','data topup','data top-up','smile comm','spectranet','ipnx'] },
-  { id: 'bills',     label: 'Bills & Subscriptions',color: '#6366f1', keywords: ['dstv','gotv','startimes','netflix','spotify','audible','icloud','google one','youtube','showmax','irokotv','subscription','canva pro','chatgpt','openai','app store','play store','google drive'] },
-  { id: 'rent',      label: 'Rent & Housing',       color: '#14b8a6', keywords: ['rent','landlord','estate','service charge','caution fee','agency fee','accommodation','apartment'] },
-  { id: 'health',    label: 'Health & Pharmacy',    color: '#ef4444', keywords: ['pharmacy','hospital','clinic','chemist','healthplus','medplus','drug','medical','paracetamol','laboratory','lab test'] },
-  { id: 'selftransfer', label: 'Self Transfers',    color: '#64748b', keywords: ['transfer to self','self transfer','wallet funding','wallet topup','wallet top-up','top-up','top up','own account','same bank transfer to self'] },
-  { id: 'income',    label: 'Income',               color: '#16a34a', keywords: [] },
-  { id: 'misc',      label: 'Miscellaneous',        color: '#9ca3af', keywords: [] }
+  { id: 'church',    label: 'Church & Givings',       color: '#8b5cf6', keywords: ['tithe','offering','thanksgiving','gospel of christ','church'] },
+  { id: 'seeds',     label: 'Seeds & Sowing',         color: '#a855f7', keywords: ['seed','sowing','first fruit'] },
+  { id: 'feeding',   label: 'Feeding',                color: '#f59e0b', keywords: ['food','dinner','breakfast','lunch','snack','suya','brunch','fiid','cike','youghit','malt','coke','energy drink','biscuit','bread','fruit','food fam','restaurant','supermart','supermarket','market','buka','kitchen','eatery','mama put','grill','pizza','grocer','provision','confection'] },
+  { id: 'electric',  label: 'Light & Electricity',    color: '#06b6d4', keywords: ['electric','nepa','paybill','kwh','prepaid','postpaid','light bill','light','ekedc','ikedc','aedc','ibedc','disco','token','power'] },
+  { id: 'fuel',      label: 'Fuel & Gas',             color: '#0ea5e9', keywords: ['fuel','petrol','foste oil','pms','nnpc','oando','gas','gass'] },
+  { id: 'airtime',   label: 'Airtime & Data',         color: '#ec4899', keywords: ['airtime','mobile data','data plan','mtn','airtel','glo','9mobile','vtu','sms subscription'] },
+  { id: 'charges',   label: 'Bank Charges',           color: '#94a3b8', keywords: ['stamp duty','vat on transfer','sms alert charges','sms charges','outstanding sms','charges'] },
+  { id: 'subs',      label: 'Subscriptions & Apps',   color: '#6366f1', keywords: ['google play','play store','app store','transsnet','netflix','spotify','boomplay','showmax','subscription','canva','chatgpt','openai','icloud'] },
+  { id: 'education', label: 'Education',              color: '#22c55e', keywords: ['school fee','course','tuition'] },
+  { id: 'health',    label: 'Health & Pharmacy',      color: '#ef4444', keywords: ['meds','drug','pharm','hospital','clinic','chemist'] },
+  { id: 'business',  label: 'Work & Business',        color: '#14b8a6', keywords: ['print','banner','phonograph','waybill','design','designs','pictures','photograph'] },
+  { id: 'transport', label: 'Transport',              color: '#3b82f6', keywords: ['transport','transportation','logistics','uber','bolt','indrive','okada','danfo','ride','toll','parking'] },
+  { id: 'cash',      label: 'Cash & POS',             color: '#64748b', keywords: ['pos transfer','cashout','pos '] },
+  { id: 'merchant',  label: 'Online Payments',        color: '#f97316', keywords: ['third-party merchant','flutterwave','paystack','monnify','checkout'] },
+  { id: 'shopping',  label: 'Shopping',               color: '#d946ef', keywords: ['temu','shop','mall','store','demerge','polish'] },
+  { id: 'selfcare',  label: 'Personal Care',          color: '#f43f5e', keywords: ['haircut','salon','barber'] },
+  { id: 'internal',  label: 'Savings & Internal',     color: '#78716c', keywords: ['owealth','auto-save'] },
+  { id: 'income',    label: 'Money In',               color: '#16a34a', keywords: [] },
+  { id: 'misc',      label: 'Miscellaneous',          color: '#9ca3af', keywords: [] }
 ];
 function catById(id) { for (var i = 0; i < CATS.length; i++) if (CATS[i].id === id) return CATS[i]; return CATS[CATS.length - 1]; }
 
 function categorize(desc, direction) {
   var d = String(desc || '').toLowerCase();
-  if (direction === 'in') return 'income';
+  if (direction === 'in') return isInternalTxn(desc) ? 'internal' : 'income';
   for (var i = 0; i < CATS.length; i++) {
     var c = CATS[i];
     if (c.keywords.length === 0) continue;
@@ -331,8 +341,8 @@ function parseCSVText(text) {
   return rowsToTxns(rows);
 }
 
-/* PDF text line parsing */
-function parsePdfLines(lines) {
+/* PDF text line parsing (generic fallback) */
+function parsePdfLinesGeneric(lines) {
   var txns = [], unrecognized = [], lastBal = null;
   var dateRe = /(\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4}|\d{4}-\d{1,2}-\d{1,2})/;
   var moneyRe = /\d{1,3}(?:,\d{3})+(?:\.\d{1,2})?|\d+\.\d{2}\b/g;
@@ -365,6 +375,95 @@ function parsePdfLines(lines) {
   }
   return { txns: txns, unrecognized: unrecognized };
 }
+/* OPay-aware PDF parsing (token buckets anchored on transaction timestamps) */
+function isInternalTxn(desc) {
+  var d = String(desc || '').toLowerCase();
+  if (d.indexOf('owealth interest') === 0) return false;           /* real income */
+  if (d.indexOf('owealth') === 0) return true;                     /* withdrawal, deposit, refund */
+  if (d.indexOf('auto-save') === 0) return true;                   /* auto-save to OWealth */
+  if (d.indexOf('reversal') === 0) return true;                    /* failed payment refunds */
+  if (d.indexOf('saka, odunayo daniel') !== -1) return true;       /* transfers to/from self */
+  if (d.indexOf('daniel odunayo saka') !== -1) return true;
+  if (d.indexOf('daniel saka') !== -1) return true;
+  if (d.indexOf('saka daniel') !== -1) return true;
+  if (d.indexOf('awe/daniel') !== -1) return true;
+  return false;
+}
+function classifyOpayTokens(tokens) {
+  var desc = [], A = [], channel = '', ref = '', refMode = false;
+  for (var i = 0; i < tokens.length; i++) {
+    var tk = tokens[i];
+    if (refMode) { if (/^[\w*.\-|/]+$/.test(tk)) ref = (ref ? ref + ' ' : '') + tk; continue; }
+    if (/^(mobile|web|ussd|pos)$/i.test(tk)) { channel = tk; refMode = true; continue; }
+    if (tk === '--') { A.push(null); continue; }
+    if (/^\d{1,3}(,\d{3})*\.\d{2}$/.test(tk)) { A.push(parseFloat(tk.replace(/,/g, ''))); continue; }
+    desc.push(tk);
+  }
+  return { desc: desc.join(' '), A: A, channel: channel, ref: ref };
+}
+function parseOpayBucket(bucket) {
+  var tokens = bucket.replace(/\s+/g, ' ').trim().split(' ');
+  var i = 0;
+  /* skip trans datetime (4 tokens) */
+  i = 4;
+  /* skip value date (3 tokens: dd Mon yyyy) */
+  if (i + 2 < tokens.length && /^\d{2}$/.test(tokens[i]) && /^\d{4}$/.test(tokens[i + 2])) i += 3;
+  var rest = tokens.slice(i);
+  /* find the last amount-or-dash token: channel/ref only come after it */
+  var lastAmtPos = -1;
+  for (var k = 0; k < rest.length; k++) {
+    if (rest[k] === '--' || /^\d{1,3}(,\d{3})*\.\d{2}$/.test(rest[k])) lastAmtPos = k;
+  }
+  var desc = [], A = [], channel = '', ref = '', refMode = false;
+  for (var k2 = 0; k2 < rest.length; k2++) {
+    var tk = rest[k2];
+    if (refMode) { if (/^[\w*\-.\/|]+$/.test(tk)) ref = (ref ? ref + ' ' : '') + tk; continue; }
+    if (k2 > lastAmtPos && /^(mobile|web|ussd|pos)$/i.test(tk)) { channel = tk; refMode = true; continue; }
+    if (tk === '--') { A.push(null); continue; }
+    if (/^\d{1,3}(,\d{3})*\.\d{2}$/.test(tk)) { A.push(parseFloat(tk.replace(/,/g, ''))); continue; }
+    desc.push(tk);
+  }
+  var c = { desc: desc.join(' '), A: A, channel: channel, ref: ref };
+  var debit = null, credit = null, balance = null;
+  if (c.A.length >= 3) {
+    balance = c.A[c.A.length - 1];
+    var others = c.A.slice(0, c.A.length - 1);
+    if (others[0] !== null && others[0] !== undefined) { debit = others[0]; }
+    else { credit = others.length > 1 ? others[1] : null; }
+  } else if (c.A.length === 2) {
+    var hint = /transfer from|received|interest|refund|reversal|credit/i.test(c.desc);
+    if (c.A[1] !== null && c.A[1] !== undefined) { balance = c.A[1]; credit = hint ? c.A[0] : null; debit = hint ? null : c.A[0]; }
+    else { balance = c.A[0]; }
+  } else if (c.A.length === 1) {
+    var hint2 = /transfer from|received|interest|refund|reversal|credit/i.test(c.desc);
+    if (hint2) credit = c.A[0]; else { debit = c.A[0]; balance = c.A[0]; }
+  }
+  if (debit === null && credit === null) return null;
+  var direction = credit !== null && credit > 0 ? 'in' : 'out';
+  var amt = direction === 'in' ? credit : debit;
+  if (!amt || amt <= 0) return null;
+  return { rawDate: tokens[0] + ' ' + tokens[1] + ' ' + tokens[2], desc: c.desc || 'Unknown', amount: amt, direction: direction, balance: balance };
+}
+function parsePdfLines(lines) {
+  var text = lines.join('\n');
+  var re = /\d{2} [A-Za-z]{3} \d{4} \d{2}:\d{2}:\d{2}/g;
+  var anchors = [], m;
+  while ((m = re.exec(text)) !== null) anchors.push(m.index);
+  if (anchors.length < 5) return parsePdfLinesGeneric(lines);
+  var txns = [], unrecognized = [];
+  for (var i = 0; i < anchors.length; i++) {
+    var bucket = text.slice(anchors[i], i + 1 < anchors.length ? anchors[i + 1] : text.length);
+    var t = parseOpayBucket(bucket);
+    if (!t && /Trans\.|Generated on/.test(bucket)) continue;
+    if (t) {
+      t.internal = isInternalTxn(t.desc);
+      t.cat = categorize(t.desc, t.direction);
+      txns.push(t);
+    } else unrecognized.push({ line: bucket.trim().slice(0, 120), reason: 'Could not read row' });
+  }
+  return { txns: txns, unrecognized: unrecognized };
+}
+
 function finishPdfTxns(txns) {
   for (var i = 0; i < txns.length; i++) {
     var dt = parseDate(txns[i].rawDate);
@@ -378,9 +477,10 @@ function finishPdfTxns(txns) {
 function computeSummary(txns, month) {
   var rows = [];
   for (var i = 0; i < txns.length; i++) if (!month || txns[i].month === month) rows.push(txns[i]);
-  var totalIn = 0, totalOut = 0, byCat = {}, merchants = {}, weeks = [0, 0, 0, 0, 0], smallCount = 0, smallSum = 0;
+  var totalIn = 0, totalOut = 0, byCat = {}, merchants = {}, weeks = [0, 0, 0, 0, 0], smallCount = 0, smallSum = 0, internalCount = 0, internalSum = 0;
   for (var j = 0; j < rows.length; j++) {
     var t = rows[j];
+    if (t.internal) { internalCount++; internalSum += t.amount; continue; }
     if (t.direction === 'in') { totalIn += t.amount; continue; }
     totalOut += t.amount;
     byCat[t.cat] = (byCat[t.cat] || 0) + t.amount;
@@ -397,7 +497,7 @@ function computeSummary(txns, month) {
   var mercList = [];
   for (var k in merchants) mercList.push({ name: k, total: merchants[k] });
   mercList.sort(function (a, b) { return b.total - a.total; });
-  return { month: month, count: rows.length, totalIn: totalIn, totalOut: totalOut, net: totalIn - totalOut, byCat: catList, topMerchants: mercList.slice(0, 5), weeks: weeks, smallCount: smallCount, smallSum: smallSum, txns: rows };
+  return { month: month, count: rows.length - internalCount, totalCount: rows.length, internalCount: internalCount, internalSum: internalSum, totalIn: totalIn, totalOut: totalOut, net: totalIn - totalOut, byCat: catList, topMerchants: mercList.slice(0, 5), weeks: weeks, smallCount: smallCount, smallSum: smallSum, txns: rows };
 }
 
 function naira(n) { return '\u20A6' + Math.round(n).toLocaleString('en-US'); }
@@ -610,6 +710,10 @@ NiboLogic.sampleData = function () {
     document.getElementById('stNet').textContent = NiboLogic.naira(s.net);
     document.getElementById('stNet').className = 'v' + (s.net < 0 ? ' out' : '');
     document.getElementById('txnCount').textContent = s.count + ' transactions';
+    var inote = document.getElementById('internalNote');
+    inote.textContent = s.internalCount ? 'Hid ' + s.internalCount + ' savings & internal movements (' + NiboLogic.naira(s.internalSum) + ') from the totals.' : '';
+    var inote = document.getElementById('internalNote');
+    inote.textContent = s.internalCount ? 'Hid ' + s.internalCount + ' savings & internal movements (' + NiboLogic.naira(s.internalSum) + ') from the totals.' : '';
     drawDonut(s); renderCats(s); renderInsights(s); renderMercs(s); renderTable(); renderUnrec();
   }
 
