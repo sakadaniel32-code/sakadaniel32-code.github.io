@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HELPA — Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF6; --card:#FFFFFF; --ink:#121A15; --muted:#5C6B62;
+  --line:#E6E4D8; --green:#0E9F5D; --green-dark:#0B7A48; --green-soft:#E7F6EE;
+  --amber:#B45309; --amber-soft:#FEF3C7; --red:#B42318; --red-soft:#FEE4E2;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.hrow{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:960px;margin:0 auto}
+.logo{font-weight:800;font-size:22px;letter-spacing:.5px}
+.logo span{color:var(--green)}
+.who{display:flex;align-items:center;gap:10px}
+.chip{background:var(--green-soft);color:var(--green-dark);border:none;font:inherit;font-weight:600;padding:8px 14px;border-radius:999px;cursor:pointer}
+.chip.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.banner{background:var(--amber-soft);color:var(--amber);font-size:13px;font-weight:600;text-align:center;padding:7px}
+main{padding:24px 0 80px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+h1{font-size:24px;font-weight:800}
+.sub{color:var(--muted);font-size:14px;margin-top:2px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--green);color:#fff;border:none;font-weight:700;padding:10px 18px;border-radius:10px}
+.btn:hover{background:var(--green-dark)}
+.btn.secondary{background:var(--card);color:var(--ink);border:1px solid var(--line);font-weight:600}
+.btn.danger{background:var(--red-soft);color:var(--red)}
+.btn.small{padding:7px 12px;font-size:13px;border-radius:8px}
+.btn.wide{width:100%}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.job .t{font-weight:700;font-size:15px}
+.job .m{color:var(--muted);font-size:13px;margin-top:2px}
+.tagrow{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px}
+.tag.cat{background:#F1F0E8;color:#4A4A3A}
+.tag.amber{background:var(--amber-soft);color:var(--amber)}
+.tag.green{background:var(--green-soft);color:var(--green-dark)}
+.tag.red{background:var(--red-soft);color:var(--red)}
+.price{font-weight:800;font-size:18px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.back{background:none;border:none;color:var(--muted);font-weight:600;font-size:14px;margin-bottom:14px}
+.detail{max-width:640px;margin:0 auto}
+.money{background:linear-gradient(135deg,#FFF9E8,#FDF0C4);border:1px solid #F1DFA6;border-radius:var(--radius);padding:18px;margin:16px 0}
+.money .k{font-size:12px;font-weight:700;letter-spacing:.6px;color:var(--amber);text-transform:uppercase}
+.money .v{font-size:26px;font-weight:800;margin-top:4px}
+.money .n{font-size:13px;color:#8A6A1F;margin-top:6px}
+.applicant{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:10px;background:#FDFDFB}
+.ava{width:38px;height:38px;border-radius:50%;background:var(--green-soft);color:var(--green-dark);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.prow{display:flex;gap:10px;align-items:flex-start}
+.badge{font-size:11px;font-weight:700;color:var(--green-dark);background:var(--green-soft);padding:2px 8px;border-radius:999px;display:inline-block}
+.stars{color:#E8A400;font-size:12px;font-weight:700}
+.wall{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.kv{border-radius:var(--radius);padding:18px}
+.kv.pending{background:var(--amber-soft);border:1px solid #F1DFA6}
+.kv.avail{background:var(--green-soft);border:1px solid #CBE9D6}
+.kv .k{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.kv.pending .k{color:var(--amber)}
+.kv.avail .k{color:var(--green-dark)}
+.kv .v{font-size:26px;font-weight:800;margin-top:4px}
+.kv .n{font-size:12px;color:var(--muted);margin-top:6px}
+.steps{margin:14px 0}
+.step{display:flex;gap:10px;padding:8px 0;font-size:14px}
+.step .dot{width:22px;height:22px;border-radius:50%;background:var(--line);color:var(--muted);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step.done .dot{background:var(--green);color:#fff}
+.step.done{font-weight:600}
+.chat{margin:12px 0}
+.msg{display:flex;gap:8px;margin-bottom:8px;font-size:14px}
+.msg b{font-weight:700;flex-shrink:0}
+.bubble{background:#F5F4EC;border-radius:12px;padding:9px 12px;flex:1}
+.templates{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tpl{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 14px;font-size:13px;font-weight:600}
+.tpl.on{border-color:var(--green);background:var(--green-soft);color:var(--green-dark)}
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}
+input,textarea,select{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+textarea{min-height:80px;resize:vertical}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-weight:600;font-size:14px;padding:12px 20px;border-radius:12px;z-index:50;max-width:90vw;text-align:center}
+.empty{color:var(--muted);text-align:center;padding:40px 0;font-size:14px}
+.note{background:#F5F4EC;border-radius:12px;padding:12px 14px;font-size:13px;color:var(--muted);margin-top:12px}
+.verifiedbox{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.dim{color:var(--muted);font-size:13px}
+@media(max-width:600px){.wall{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="banner">Demo mode &middot; pretend money &middot; built to show how one job travels from request to payout</div>
+<header><div class="hrow">
+  <div class="logo">HELP<span>A</span></div>
+  <div class="who"><span class="chip ghost" id="walletchip" style="display:none"></span><span class="chip" id="whoami" onclick="cycleUser()"></span></div>
+</div></header>
+<main class="wrap" id="app"></main>
+<div id="toasts"></div>
+<script>
+const FEE_FIRST=0.10, FEE_REPEAT=0.05;
+const USERS={
+ ada:{id:'ada',name:'Ada Obi',initials:'AO',badge:'Phone verified'},
+ chuka:{id:'chuka',name:'Chuka Eze',initials:'CE',badge:'Verified · ID checked',rating:4.9,jobs:23},
+ amaka:{id:'amaka',name:'Amaka Obi',initials:'AM',badge:'Verified',rating:4.7,jobs:11},
+ kunle:{id:'kunle',name:'Kunle Ade',initials:'KA',badge:'Verified',rating:4.5,jobs:8},
+ tunde:{id:'tunde',name:'Tunde Bakare',initials:'TB',badge:'Phone verified'}
+};
+function seed(){return{
+ me:'ada',seq:10,pairs:{},
+ wallets:{chuka:{pending:0,available:12400},kunle:{pending:0,available:3200},amaka:{pending:0,available:4300}},
+ jobs:[
+  {id:'j1',title:'Type my 12-page report',cat:'digital',budget:8000,asker:'ada',desc:'12 pages, clean formatting. Chapter headings bold, tables kept as tables. Needed before my defence next week.',deadline:'Tuesday',status:'open',
+   applicants:[{id:'chuka',msg:'I type fast and clean, tables included. Can deliver Monday evening.',price:8000},{id:'amaka',msg:'I can have this ready Wednesday.',price:7500}],history:[]},
+  {id:'j2',title:'Market run: Ikota',cat:'physical',budget:5000,asker:'tunde',desc:'Tomatoes, pepper, onions and one bag of rice. I will send the full list in chat. Call me before buying anything.',deadline:'Today, 4pm',status:'open',checkin:true,
+   applicants:[{id:'kunle',msg:'I stay in Jakande, 10 minutes from Ikota. I know the good tomato section.',price:5000}],history:[]},
+  {id:'j3',title:'Design a flyer for my shop',cat:'digital',budget:6000,asker:'tunde',helper:'kunle',desc:'A4 shop flyer, red and cream, for Mama Nkechi Foods. Print-ready.',deadline:'Thursday',status:'dispute',delivery:'Flyer final (PDF), delivered in the app.',
+   chat:[{who:'tunde',text:'Can you finish the flyer today?'},{who:'kunle',text:'Yes. Send me the shop name and colours.'},{who:'tunde',text:'Shop name is Mama Nkechi Foods. Colours: red and cream.'},{who:'kunle',text:'Got it. Sending tonight.'}],
+   dispute:{claim:'Tunde says the flyer reads "Mama Nkechi Shop" instead of "Mama Nkechi Foods" as agreed in chat.',helper:'Kunle says the work followed the chat, the name came from Tunde himself, and the job should be released.'},history:[]}
+ ]};}
+let S;
+function load(){try{S=JSON.parse(localStorage.getItem('helpa'));}catch(e){S=null;}if(!S||!S.jobs)S=seed();save();}
+function save(){localStorage.setItem('helpa',JSON.stringify(S));}
+function reset(){S=seed();save();toast('Demo reset');render();}
+function money(n){return '₦'+n.toLocaleString('en-NG');}
+function me(){return USERS[S.me];}
+function job(id){return S.jobs.find(j=>j.id===id);}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.getElementById('toasts').appendChild(d);setTimeout(()=>d.remove(),3200);}
+function cycleUser(){const order=['ada','chuka','tunde','ref'];const i=order.indexOf(S.me);S.me=order[(i+1)%order.length];save();render();}
+function pairKey(a,h){return a+'|'+h;}
+function feeFor(j){const c=S.pairs[pairKey(j.asker,j.helper)]||0;return c>0?FEE_REPEAT:FEE_FIRST;}
+
+function go(v,arg){S.view={v:v,arg:arg};save();render();}
+if(!S)S=seed();
+load();
+if(!S.view)S.view={v:'board'};
+
+function render(){
+ const app=document.getElementById('app');
+ const u=me(); const isRef=S.me==='ref';
+ document.getElementById('whoami').textContent=isRef?'Viewing: Referee (HELPA team)':'Viewing: '+u.name;
+ const w=isRef?null:S.wallets[S.me];
+ const chip=document.getElementById('walletchip');
+ if(w){chip.style.display='';chip.textContent='Wallet: '+money(w.pending+w.available);}else{chip.style.display='none';}
+ if(S.view.v==='job')app.innerHTML=viewJob(S.view.arg);
+ else if(S.view.v==='post')app.innerHTML=viewPost();
+ else if(S.view.v==='wallet')app.innerHTML=viewWallet();
+ else if(S.view.v==='ref')app.innerHTML=viewRef(S.view.arg);
+ else app.innerHTML=viewBoard();
+ window.scrollTo(0,0);
+}
+
+function jobCard(j,ctx){
+ const a=USERS[j.asker];
+ let tag='';
+ if(j.status==='open')tag='<span class="tag green">Open · '+j.applicants.length+' applied</span>';
+ if(j.status==='funded')tag='<span class="tag amber">Money in the safe</span>';
+ if(j.status==='delivered')tag='<span class="tag amber">Delivered · awaiting approval</span>';
+ if(j.status==='fix')tag='<span class="tag amber">Fix requested</span>';
+ if(j.status==='dispute')tag='<span class="tag red">With the referee</span>';
+ if(j.status==='done')tag='<span class="tag green">Completed</span>';
+ return '<div class="card job" style="cursor:pointer" onclick="go(\'job\',\''+j.id+'\')">'+
+  '<div class="row"><div class="t">'+esc(j.title)+'</div><div class="price">'+money(j.budget)+'</div></div>'+
+  '<div class="m">'+esc(a.name)+' · '+esc(j.deadline)+'</div>'+
+  '<div class="tagrow"><span class="tag cat">'+(j.cat==='physical'?'Physical errand':'Digital job')+'</span>'+tag+'</div></div>';
+}
+
+function viewBoard(){
+ const isRef=S.me==='ref';const u=me();
+ if(isRef){
+  const ds=S.jobs.filter(j=>j.status==='dispute');
+  return '<div class="topbar"><div><h1>Referee desk</h1><div class="sub">You only step in when two people disagree.</div></div><button class="btn secondary small" onclick="reset()">Reset demo</button></div>'+
+   (ds.length?'<div class="grid">'+ds.map(j=>jobCard(j)).join('')+'</div>':'<div class="empty">No disagreements right now. This is what a healthy market looks like.</div>');
+ }
+ let mine=[],open=[];
+ S.jobs.forEach(j=>{
+  if(j.status==='open')open.push(j);
+  else if(S.me===j.asker||(j.helper===S.me&&j.status!=='done'))mine.push(j);
+  else if(j.status==='done'&&(S.me===j.asker||j.helper===S.me))mine.push(j);
+ });
+ const title=S.me==='chuka'||S.me==='amaka'||S.me==='kunle'?'Jobs near you':'Your jobs';
+ let h='<div class="topbar"><div><h1>'+title+'</h1><div class="sub">HELPA · everyday jobs, money held safe until work is approved.</div></div>'+
+  '<div class="row" style="gap:8px">'+(S.me==='ada'||S.me==='tunde'?'<button class="btn" onclick="go(\'post\')">Post a job</button>':'<button class="btn secondary" onclick="go(\'wallet\')">My wallet</button>')+'</div></div>';
+ if(mine.length)h+='<div class="grid">'+mine.map(j=>jobCard(j)).join('')+'</div>';
+ h+='<div style="margin-top:22px;font-weight:700;font-size:15px">Open on the board</div><div class="grid" style="margin-top:10px">'+
+  (open.length?open.filter(j=>!(S.me==='chuka'&&j.id==='j1')).map(j=>jobCard(j)).join(''):'<div class="empty">Nothing open right now.</div>')+'</div>';
+ return h;
+}
+
+function viewPost(){
+ const u=me();
+ return '<div class="detail"><button class="back" onclick="go(\'board\')">← Back</button>'+
+ '<div class="card"><h1 style="font-size:19px">Post a job</h1>'+
+ '<div class="templates" style="margin-top:14px">'+
+ '<button class="tpl" onclick="tpl(\'market\')">Market run</button>'+
+ '<button class="tpl" onclick="tpl(\'doc\')">Type a document</button>'+
+ '<button class="tpl" onclick="tpl(\'logo\')">Logo design</button></div>'+
+ '<label>What do you need?</label><input id="pt" placeholder="e.g. Market run: Adder street">'+
+ '<label>Describe it, and what done looks like</label><textarea id="pd" placeholder="Be specific. Clear briefs mean fewer arguments later."></textarea>'+
+ '<div style="display:flex;gap:10px"><div style="flex:1"><label>Budget (₦)</label><input id="pb" type="number" placeholder="5000"></div>'+
+ '<div style="flex:1"><label>When</label><input id="pd2" placeholder="Today 4pm"></div></div>'+
+ '<label>Kind of job</label><select id="pc"><option value="physical">Physical errand (helper may visit)</option><option value="digital">Digital job</option></select>'+
+ '<div class="note">Physical jobs ask helpers to verify with BVN or NIN plus a selfie before they can apply, and offer location sharing and a check-in button while the errand runs.</div>'+
+ '<button class="btn wide" style="margin-top:16px" onclick="postJob()">Post to the board</button></div></div>';
+}
+function tpl(k){
+ const d=document.getElementById('pd');
+ if(k==='market'){document.getElementById('pt').value='Market run: ';document.getElementById('pc').value='physical';d.value='Items: (list everything)\nDone looks like: everything bought correctly, with receipts, delivered to me.';}
+ if(k==='doc'){document.getElementById('pt').value='Type a document: ';document.getElementById('pc').value='digital';d.value='Pages: \nFormat: clean headings, numbered pages\nDone looks like: final file delivered in the app, matches my draft.';}
+ if(k==='logo'){document.getElementById('pt').value='Logo design: ';document.getElementById('pc').value='digital';d.value='Style: \nDone looks like: logo in PNG and SVG, one free fix round.';}
+}
+function postJob(){
+ const t=document.getElementById('pt').value.trim(),d=document.getElementById('pd').value.trim();
+ const b=parseInt(document.getElementById('pb').value),dl=document.getElementById('pd2').value.trim()||'Flexible';
+ const c=document.getElementById('pc').value;
+ if(!t||!b){toast('Add a title and a budget');return;}
+ const id='j'+(S.seq++);
+ S.jobs.push({id:id,title:t,cat:c,budget:b,asker:S.me,desc:d,deadline:dl,status:'open',applicants:[
+  {id:'chuka',msg:'I can do this. Available now.',price:b},{id:'amaka',msg:'Interested. Let me know.',price:Math.max(500,b-500)}],history:[],checkin:c==='physical'});
+ save();toast('Posted. Two helpers already raised their hands.');go('job',id);
+}
+
+function viewJob(id){
+ const j=job(id);if(!j)return '<div class="empty">Job not found.</div>';
+ const a=USERS[j.asker];const u=me();const isRef=S.me==='ref';
+ let h='<div class="detail"><button class="back" onclick="go(\'board\')">← Back to the board</button>';
+ h+='<div class="card"><div class="row"><div><h1 style="font-size:20px">'+esc(j.title)+'</h1><div class="sub">Posted by '+esc(a.name)+' · '+esc(j.deadline)+'</div></div><div class="price">'+money(j.budget)+'</div></div>';
+ h+='<div class="tagrow"><span class="tag cat">'+(j.cat==='physical'?'Physical errand':'Digital job')+'</span>'+
+  (j.checkin?'<span class="tag green">ID-verified helpers only · check-in supported</span>':'')+'</div>';
+ h+='<p class="dim" style="margin-top:12px">'+esc(j.desc)+'</p>';
+ h+=stepsBar(j);
+ if(j.status==='dispute'&&isRef)return h+refCase(j);
+ if(j.status==='dispute')return h+'<div class="note">This job is with the referee. The HELPA team reads the chat, the brief and the delivery, then decides.</div></div>';
+ if(j.helper&&(j.status==='funded'||j.status==='delivered'||j.status==='fix')){
+  const fee=feeFor(j),net=j.budget*(1-fee);
+  h+='<div class="money"><div class="k">The safe</div><div class="v">'+money(j.budget)+' held</div>'+
+   '<div class="n">'+(j.status==='funded'?'The helper can see the money is real, but cannot touch it until the work is approved.':'Work delivered. Waiting for '+a.name.split(' ')[0]+' to approve. Auto-releases in 48h if nothing is said.')+'</div></div>';
+  if(S.me===j.helper){
+   if(j.status==='funded')h+='<button class="btn wide" onclick="deliver(\''+j.id+'\')">I have finished. Deliver in the app</button>';
+   if(j.status==='delivered')h+='<div class="note">Delivered: '+esc(j.delivery||'Work submitted in the app')+'</div>';
+   if(j.status==='fix')h+='<div class="note">'+esc(a.name.split(' ')[0])+' asked for one fix: '+esc(j.fixnote)+'</div><button class="btn wide" style="margin-top:10px" onclick="deliver(\''+j.id+'\')">Send the fixed work</button>';
+  }
+  if(S.me===j.asker){
+   if(j.status==='funded')h+='<div class="note">Waiting on '+USERS[j.helper].name.split(' ')[0]+'. You will get an alert the moment the work lands.</div>';
+   if(j.status==='delivered'){
+    h+='<div style="display:grid;gap:8px;margin-top:12px"><button class="btn wide" onclick="approve(\''+j.id+'\')">Approve · open the safe</button>'+
+     '<button class="btn secondary wide" onclick="askFix(\''+j.id+'\')">Fix this please (one free fix)</button>'+
+     '<button class="btn danger wide" onclick="toRef(\''+j.id+'\')">Something is wrong · call the referee</button></div>';
+   }
+  }
+  if(j.status==='done'){
+   const f=feeFor(j);
+   h+='<div class="money"><div class="k">The safe opened</div><div class="v">'+money(j.budget-Math.round(j.budget*f))+' to the helper</div><div class="n">HELPA fee '+Math.round(f*100)+'% ('+(S.pairs[pairKey(j.asker,j.helper)]>1?'repeat pair rate: 5%':'first job: 10%')+'). Rated by both sides.</div></div>';
+   if(S.me===j.asker&&j.reviewed!==true)h+='<div style="display:grid;gap:8px"><div class="note">Rate '+esc(USERS[j.helper].name.split(' ')[0])+':</div><div class="row"><button class="btn small" onclick="rate(\''+j.id+'\',5)">★★★★★ Great</button><button class="btn secondary small" onclick="rate(\''+j.id+'\',3)">★★★ OK</button></div></div>';
+   if(S.me===j.asker)h+='<button class="btn wide" style="margin-top:12px" onclick="hireAgain(\''+j.id+'\')">Hire again · saved price · fee drops to 5%</button>';
+  }
+ }
+ if(j.status==='open'&&!isRef){
+  if(S.me===j.asker){
+   h+='<div style="font-weight:700;margin-top:18px">'+j.applicants.length+' helpers raised their hands</div>';
+   j.applicants.forEach(ap=>{
+    const p=USERS[ap.id];
+    h+='<div class="applicant"><div class="row"><div class="prow"><div class="ava">'+p.initials+'</div><div><b>'+esc(p.name)+'</b> <span class="badge">'+esc(p.badge)+'</span><div class="stars">★ '+p.rating+' · '+p.jobs+' jobs done</div></div></div><div class="price">'+money(ap.price)+'</div></div>'+
+    '<div class="dim" style="margin:8px 0 10px">'+esc(ap.msg)+'</div><button class="btn small" onclick="pick(\''+j.id+'\',\''+ap.id+'\')">Pick '+esc(p.name.split(' ')[0])+'</button></div>';
+   });
+   h+='<div class="note">When you pick someone, a private chat opens inside HELPA. Everything said here is exactly what the referee reads if you ever disagree.</div>';
+  } else {
+   const mine=j.applicants.some(x=>x.id===S.me);
+   if(mine)h+='<div class="note">You applied. '+a.name.split(' ')[0]+' is choosing.</div>';
+   else h+='<div style="margin-top:16px"><button class="btn wide" onclick="apply(\''+j.id+'\')">Raise my hand · say why and my price</button></div>';
+  }
+ }
+ if(j.status==='open'&&isRef)h+='<div class="note">Nothing to referee here. The safe only opens on approval, an automatic 48-hour timer, or a referee decision.</div>';
+ if(j.chat&&j.chat.length){h+='<div style="font-weight:700;margin-top:18px">Chat (kept inside HELPA)</div><div class="chat">'+j.chat.map(m=>'<div class="msg"><b>'+esc(USERS[m.who].name.split(' ')[0])+'</b><div class="bubble">'+esc(m.text)+'</div></div>').join('')+'</div>';}
+ h+='</div></div>';
+ return h;
+}
+
+function stepsBar(j){
+ const order=['Posted','Helper picked','Money in the safe','Work delivered','Approved · paid'];
+ let idx=0;
+ if(j.status==='open')idx=1;if(j.status==='funded')idx=3;if(j.status==='delivered'||j.status==='fix')idx=4;if(j.status==='dispute')idx=4;if(j.status==='done')idx=5;
+ let h='<div class="steps" style="margin-top:14px">';
+ order.forEach((s,i)=>{h+='<div class="step'+(i<idx?' done':'')+'"><div class="dot">'+(i<idx?'✓':i+1)+'</div><div>'+s+'</div></div>';});
+ return h+'</div>';
+}
+
+function pick(jid,hid){
+ const j=job(jid);j.helper=hid;j.status='funded';
+ j.history.push('Picked '+USERS[hid].name);
+ S.wallets[hid].pending+=j.budget;
+ S.pairs[pairKey(j.asker,hid)]=S.pairs[pairKey(j.asker,hid)]||0;
+ save();toast('Money is in the safe. '+USERS[hid].name.split(' ')[0]+' can now start working.');render();
+}
+function apply(jid){
+ const j=job(jid);j.applicants.push({id:S.me,msg:'I am available and verified.',price:j.budget});
+ save();toast('You applied. An alert went to '+USERS[j.asker].name.split(' ')[0]+'.');render();
+}
+function deliver(jid){
+ const j=job(jid);j.status='delivered';j.delivery='Finished work delivered inside HELPA';
+ j.deliveredAt=Date.now();save();toast('Delivered. '+USERS[j.asker].name.split(' ')[0]+' has 48 hours to respond.');render();
+}
+function askFix(jid){
+ const j=job(jid);j.status='fix';j.fixnote='One round of fixes requested.';
+ j.history.push('Fix requested');save();toast('One free fix requested.');render();
+}
+function approve(jid){
+ const j=job(jid);const f=feeFor(j);const fee=Math.round(j.budget*f);const net=j.budget-fee;
+ S.wallets[j.helper].pending-=j.budget;S.wallets[j.helper].available+=net;
+ S.pairs[pairKey(j.asker,j.helper)]=(S.pairs[pairKey(j.asker,j.helper)]||0)+1;
+ j.status='done';j.fee=f;j.history.push('Approved · '+money(net)+' released');
+ save();toast('The safe opened. '+money(net)+' moved to '+USERS[j.helper].name.split(' ')[0]+"'s wallet.");render();
+}
+function rate(jid,stars){const j=job(jid);j.reviewed=true;save();toast('Thanks. Ratings decide who gets picked next.');render();}
+function hireAgain(jid){
+ const j=job(jid);const id='j'+(S.seq++);
+ S.jobs.push({id:id,title:j.title+' (again for '+USERS[j.asker].name.split(' ')[0]+')',cat:j.cat,budget:j.budget,asker:j.asker,desc:j.desc,deadline:'This week',status:'open',applicants:[{id:j.helper,msg:'Ready when you are. Same price as last time.',price:j.budget}],history:[],repeat:true,checkin:j.checkin});
+ save();toast('Repeat job posted at the saved price.');go('job',id);
+}
+function toRef(jid){const j=job(jid);j.status='dispute';j.dispute={claim:me().name.split(' ')[0]+' says the delivered work does not match what was agreed in chat.',helper:USERS[j.helper].name.split(' ')[0]+' says the work followed the brief.'};save();toast('The referee now has the chat, the brief and the delivery.');go('board');}
+function refCase(j){
+ return '<div class="money" style="background:#FEE4E2;border-color:#F5B5B0"><div class="k" style="color:var(--red)">Referee case</div><div class="v" style="font-size:20px">'+money(j.budget)+' held in the safe</div><div class="n" style="color:#7A271F">'+esc(j.dispute.claim)+'</div><div class="n" style="color:#7A271F">'+esc(j.dispute.helper)+'</div></div>'+
+ '<div class="note">What the referee sees: the original brief, the full chat, and what was delivered. The chat shows the asker himself gave the shop name, so the work followed what was agreed.</div>'+
+ '<div style="display:grid;gap:8px;margin-top:14px"><button class="btn wide" onclick="refResolve(\''+j.id+'\',\'helper\')">Release '+money(Math.round(j.budget*0.9))+' to the helper</button>'+
+ '<button class="btn secondary wide" onclick="refResolve(\''+j.id+'\',\'asker\')">Refund '+money(j.budget)+' to the asker</button></div>';
+}
+function refResolve(jid,side){
+ const j=job(jid);const fee=Math.round(j.budget*0.1);
+ if(side==='helper'){S.wallets[j.helper].pending-=j.budget;S.wallets[j.helper].available+=j.budget-fee;j.status='done';j.fee=0.1;toast('Released. '+money(j.budget-fee)+' to '+USERS[j.helper].name.split(' ')[0]+'.');}
+ else{S.wallets[j.helper].pending-=j.budget;j.status='refunded';toast('Refunded. '+money(j.budget)+' back to '+USERS[j.asker].name.split(' ')[0]+'.');}
+ j.resolved=side;save();go('board');
+}
+
+function viewWallet(){
+ if(S.me!=='chuka'&&S.me!=='kunle'&&S.me!=='amaka'){return '<div class="detail"><div class="empty">Switch to a helper (Chuka, Amaka or Kunle) to see a wallet.</div></div>';}
+ const w=S.wallets[S.me];
+ return '<div class="detail"><button class="back" onclick="go(\'board\')">← Back</button>'+
+ '<h1>My wallet</h1><div class="sub">'+esc(me().name)+' · '+esc(me().badge)+'</div>'+
+ '<div class="wall"><div class="kv pending"><div class="k">Pending · in the safe</div><div class="v">'+money(w.pending)+'</div><div class="n">Real, but cannot be touched until the work is approved.</div></div>'+
+ '<div class="kv avail"><div class="k">Available</div><div class="v">'+money(w.available)+'</div><div class="n">Withdraw to your Nigerian bank any time.</div></div></div>'+
+ '<button class="btn wide" '+(w.available?'':'disabled')+' onclick="withdraw()">Withdraw to GTBank ••41</button>'+
+ '<div class="note">In the real product this money sits with a licensed payment partner. HELPA never holds it; the app only shows the status.</div></div>';
+}
+function withdraw(){const w=S.wallets[S.me];const amt=w.available;w.available=0;save();toast(money(amt)+' sent to GTBank ••41');render();}
+</script>
+</body>
+</html>
