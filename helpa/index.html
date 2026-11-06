@@ -344,6 +344,7 @@ function viewWallet(){
  '<div class="note">In the real product this money sits with a licensed payment partner. HELPA never holds it; the app only shows the status.</div></div>';
 }
 function withdraw(){const w=S.wallets[S.me];const amt=w.available;w.available=0;save();toast(money(amt)+' sent to GTBank ••41');render();}
+render();
 </script>
 </body>
 </html>
